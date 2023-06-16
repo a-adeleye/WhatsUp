@@ -24,7 +24,7 @@ const WhatsUp: React.FC<any> = () => {
     }, []);
 
     return (
-        <body className={"container"}>
+        <body>
         <Header date={newsLetter?.Title}/>
         <Main news_letter={newsLetter}/>
         </body>

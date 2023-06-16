@@ -7,6 +7,12 @@ import {Spinner} from "office-ui-fabric-react";
 import FeaturedEmployee from "../Featured-Employee/Featured-Employee";
 import News from "../News/News";
 import BirthDayBanner from "../BirthDayBanner/BirthDayBanner";
+import ScamAwareness from "../ScamAwareness/ScamAwareness";
+import NewJoiners from "../NewJoiners/NewJoiners";
+import Movements from "../Movements/Movements";
+import Awards from "../Awards/Awards";
+import ShareYourStory from "../ShareYourStory/ShareYourStory";
+import BrightIdeas from "../BrightIdeas/BrightIdeas";
 
 const Main: React.FC<any> = (props) => {
 
@@ -90,6 +96,23 @@ const Main: React.FC<any> = (props) => {
                 <BirthDayBanner data={birthdayBanners} birthday_text={birthdayText} celebrants={celebrants}
                                 news_letter={news_letter}/>
             </Section>
+            <ScamAwareness/>
+            <Section title={"New Joiners"} icon={"circle-plus"}>
+                <NewJoiners news_letter={news_letter}/>
+            </Section>
+            <div className="spacer"></div>
+            <Section title={"Awards / Promotions"} icon={"briefcase"}>
+                <Movements news_letter={news_letter}/>
+            </Section>
+            <div className="spacer"></div>
+            <Section title={"Awards and Recognitions"} icon={"trophy"}>
+                <Awards news_letter={news_letter}/>
+            </Section>
+            <ShareYourStory/>
+            <div className="spacer"></div>
+            <div>Upcoming events</div>
+            <div className="spacer"></div>
+            <BrightIdeas/>
         </main>
     );
 }

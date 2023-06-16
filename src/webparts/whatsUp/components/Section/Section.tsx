@@ -10,7 +10,7 @@ const Section: React.FC<any> = (props) => {
     const {title, icon, children} = props;
     return (
         <section>
-            <div data-aos="fade-right" className={"section-title"}>
+            <div className={"section-title"}>
                 <FontAwesomeIcon icon={icon} size="xl"/>
                 <h2>{title}</h2>
             </div>

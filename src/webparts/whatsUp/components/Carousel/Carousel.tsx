@@ -57,25 +57,28 @@ const Carousel: React.FC<CarouselProps> = ({images}) => {
     }, [isPopupOpen]);
 
     return (
-        <div className="carousel">
-            {(!isPopupOpen && images.length > 1) &&
-                <button onClick={(event) => previousImage(event)} className={"carousel-button previous"}>
-                    <FontAwesomeIcon icon={"chevron-left"} size="xl"/>
-                </button>}
-            {(!isPopupOpen && images.length > 1) &&
-                <button onClick={(event) => nextImage(event)} className={"carousel-button next"}>
-                    <FontAwesomeIcon icon={"chevron-right"} size="xl"/>
-                </button>}
-            <Image src={images[currentImageIndex]} alt="Image" className="carousel-image" onClick={openPopup}/>
+        <>
+            {images.length && <div className="carousel">
+                {(!isPopupOpen && images.length > 1) &&
+                    <button onClick={(event) => previousImage(event)} className={"carousel-button previous"}>
+                        <FontAwesomeIcon icon={"chevron-left"} size="xl"/>
+                    </button>}
+                {(!isPopupOpen && images.length > 1) &&
+                    <button onClick={(event) => nextImage(event)} className={"carousel-button next"}>
+                        <FontAwesomeIcon icon={"chevron-right"} size="xl"/>
+                    </button>}
+                <Image src={images[currentImageIndex]} alt="Image" className="carousel-image" onClick={openPopup}/>
 
-            {isPopupOpen && (
-                <div className="popup-overlay" onClick={closePopup}>
-                    <div className="popup-content">
-                        <Image src={images[currentImageIndex]} alt="Image"/>
+                {isPopupOpen && (
+                    <div className="popup-overlay" onClick={closePopup}>
+                        <div className="popup-content">
+                            <Image src={images[currentImageIndex]} alt="Image"/>
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
+            }
+        </>
     );
 };
 

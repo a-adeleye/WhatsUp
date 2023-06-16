@@ -21,6 +21,14 @@ export const getListByTitle = (listTitle: string): Promise<any> => {
         });
 };
 
+export const extractImageUrl = (jsonString: string) => {
+    if (!jsonString) {
+        return "https://jetexfs.sharepoint.com/sites/appcatalog/ClientSideAssets/1797d7dc-68cf-4b05-9b0f-0a4479138be2/default_user_d8a851d076dd2b17d3205b86c61019f9.jpg";
+    }
+    const data = JSON.parse(jsonString);
+    return data.serverRelativeUrl;
+}
+
 export const getListItemsByTitle = (listTitle: string, filter?: string): Promise<any> => {
     if (filter) {
         return sp.web.lists.getByTitle(listTitle).items.filter(filter)()

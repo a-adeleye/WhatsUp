@@ -1,25 +1,23 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import './Main.scss';
+import {extractImageUrl, getListItemsByTitle} from "../../Utils";
 import Section from "../Section/Section";
-import News from "../News/News";
-import {getListByTitle} from "../../Utils";
 import {Spinner} from "office-ui-fabric-react";
+import FeaturedEmployee from "../Featured-Employee/Featured-Employee";
+import News from "../News/News";
+import BirthDayBanner from "../BirthDayBanner/BirthDayBanner";
 
-require('../../assets/images/14.jpg');
-require('../../assets/images/23.jpg');
-require('../../assets/images/15.jpg');
-require('../../assets/images/31.jpg');
+const Main: React.FC<any> = (props) => {
 
-const Main: React.FC<any> = () => {
+    const {news_letter} = props;
 
     const [loading, setLoading] = useState(true);
     const [news, setNews] = useState([]);
-
-    const extractImageUrl = (jsonString: string) => {
-        const data = JSON.parse(jsonString);
-        return data.serverRelativeUrl;
-    }
+    const [featuredEmployee, setFeaturedEmployee] = useState({});
+    const [birthdayBanners, setBirthdayBanners] = useState([]);
+    const [birthdayText, setBirthdayText] = useState([]);
+    const [celebrants, setCelebrants] = useState([]);
 
     const extractImages = (news: any, imageData: any) => {
         return imageData.filter((image: any) => news.Id === image.NewsContentId)
@@ -27,36 +25,40 @@ const Main: React.FC<any> = () => {
     };
 
     const extractNews = (newsData: any, imageData: any) => {
+
+        newsData.sort((a: any, b: any) => {
+            return a.NewsOrder - b.NewsOrder;
+        })
+
         const extractedNewsArray = newsData.map((news: any) => ({
             id: news.Id,
             title: news.Title,
             content: news.Details,
-            created: news.Created,
             images: extractImages(news, imageData)
         }));
 
-        sortNews(extractedNewsArray)
-
-        console.log(extractedNewsArray);
-    }
-    const sortNews = (news: any[]) => {
-        news.sort((a: any, b: any) => {
-            const dateA: any = new Date(a.created);
-            const dateB: any = new Date(b.created);
-            return dateB - dateA;
-        });
-        setNews(news);
+        setNews(extractedNewsArray);
+        setLoading(false);
     }
 
-    const getNewsData = (): void => {
-        setLoading(true);
+    const getData = (): void => {
+        if (!news_letter) {
+            return;
+        }
         Promise.all([
-            getListByTitle('NewsContent'),
-            getListByTitle('NewsImages'),
+            getListItemsByTitle('NewsContent', "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("NewsImages"),
+            getListItemsByTitle("FeaturedEmployee", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("Birthday Banners", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("Birthday Text", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("Birthday List", "NewsletterId eq '" + news_letter.Id + "'"),
         ])
-            .then(([news, images]) => {
+            .then(([news, images, employee, birthday_banner, birthday_text, birthdays]) => {
                 extractNews(news, images);
-                setLoading(false);
+                setFeaturedEmployee(employee[0]);
+                setBirthdayBanners(birthday_banner);
+                setBirthdayText(birthday_text[0]);
+                setCelebrants(birthdays);
             })
             .catch((error) => {
                 console.log(error);
@@ -64,9 +66,8 @@ const Main: React.FC<any> = () => {
     };
 
     useEffect(() => {
-        getNewsData();
-    }, []);
-
+        getData();
+    }, [news_letter]);
 
     return (
         <main>
@@ -74,7 +75,7 @@ const Main: React.FC<any> = () => {
                 <div className={"text-center"}>
                     {loading && <Spinner/>}
                 </div>
-                {news.map(item => (
+                {news.slice(0, 2).map(item => (
                     <News title={item.title}
                           text={item.content}
                           key={item.id}
@@ -82,8 +83,13 @@ const Main: React.FC<any> = () => {
                     />
                 ))}
             </Section>
-            <Section title={"Featured Employees"} icon={"user"}/>
-            <Section title={"Birthdays"} icon={"cake-candles"}/>
+            <Section title={"Featured Employees"} icon={"user"}>
+                <FeaturedEmployee employee={featuredEmployee}/>
+            </Section>
+            <Section title={"Birthdays"} icon={"cake-candles"}>
+                <BirthDayBanner data={birthdayBanners} birthday_text={birthdayText} celebrants={celebrants}
+                                news_letter={news_letter}/>
+            </Section>
         </main>
     );
 }

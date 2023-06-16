@@ -15,6 +15,10 @@ header {
 
   .title {
     font-family: Josefin Sans, serif;
+
+    .date {
+      text-transform: capitalize;
+    }
   }
 }
 

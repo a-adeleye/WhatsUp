@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './Header.scss';
 
-const Header: React.FC<any> = () => {
+const Header: React.FC<any> = (props) => {
+    const {date} = props;
     return (
         <header>
             <div className={"header-image"}>
@@ -9,7 +10,7 @@ const Header: React.FC<any> = () => {
             </div>
             <div className={"title"}>
                 <h4>Jetex Internal Newsletter</h4>
-                <h4>September 2022</h4>
+                <h4 className={"date"}>{date}</h4>
             </div>
         </header>
     );

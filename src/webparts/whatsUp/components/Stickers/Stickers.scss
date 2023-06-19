@@ -1,0 +1,33 @@
+.stickers {
+  padding: 40px 50px;
+
+  .title {
+    padding: 20px 10px 20px;
+    font-size: 28px;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .sticker-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px 0;
+
+    .sticker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 250px;
+      padding: 20px;
+      width: 20%;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+}

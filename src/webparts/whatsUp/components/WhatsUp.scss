@@ -36,3 +36,21 @@
 .primary-text {
   color: var(--primary);
 }
+
+.success-message {
+  background: #3a693a;
+}
+
+.error-message,
+.success-message {
+  padding: 1em 2em;
+  border-radius: 8px;
+  width: max-content;
+  color: #fff;
+  font-size: 22px;
+  margin: auto;
+}
+
+.error-message {
+  background: #ed1f4e;
+}

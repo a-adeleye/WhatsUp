@@ -64,6 +64,9 @@
   }
 
   button {
+    display: flex;
+    align-items: center;
+    gap: .5em;
     background: none;
     border: 2px solid #fff;
     padding: 10px 60px 7px 60px;
@@ -75,7 +78,6 @@
     cursor: pointer;
     transition-duration: .3s;
     font-size: 20px;
-    margin-top: 25px;
   }
 
   button:hover {
@@ -87,10 +89,13 @@
 .with-form {
 
   form {
-    height: 505px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    min-height: 325px;
     width: 450px;
     margin: auto;
-    text-align: center;
 
     input {
       height: 65px;
@@ -102,15 +107,13 @@
 
     input,
     textarea {
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
+      border-radius: 8px;
       font-size: 20px;
       background-color: var(--primary);
       color: #fff;
       padding: 0 20px;
       width: 100%;
-      border: 0 solid #fff;
-      border-bottom-width: 2px;
+      border: 2px solid #fff;
       outline: none;
     }
 

@@ -41,7 +41,7 @@ const FeaturedEmployee: React.FC<any> = (props) => {
                 <div className="question">
                     <FontAwesomeIcon icon={["far", "circle"]} size="xl" className={"primary-text"}/>
                     <div className="question-text">
-                        <p>What's the biggest challenge you face in your job?</p>
+                        <p>What&apos;s the biggest challenge you face in your job?</p>
                         <div className="answer" dangerouslySetInnerHTML={{__html: employee?.BiggestChallenge}}/>
                     </div>
                 </div>

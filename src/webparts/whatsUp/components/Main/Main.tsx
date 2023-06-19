@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import './Main.scss';
-import {extractImageUrl, getListItemsByTitle} from "../../Utils";
+import {currentUSer, extractImageUrl, getListItemsByTitle} from "../../Utils";
 import Section from "../Section/Section";
 import {Spinner} from "office-ui-fabric-react";
 import FeaturedEmployee from "../Featured-Employee/Featured-Employee";
@@ -13,6 +13,9 @@ import Movements from "../Movements/Movements";
 import Awards from "../Awards/Awards";
 import ShareYourStory from "../ShareYourStory/ShareYourStory";
 import BrightIdeas from "../BrightIdeas/BrightIdeas";
+import UpcomingEvents from "../UpcomingEvents/UpcomingEvents";
+import Stickers from "../Stickers/Stickers";
+import Quiz from "../Quiz/Quiz";
 
 const Main: React.FC<any> = (props) => {
 
@@ -24,6 +27,9 @@ const Main: React.FC<any> = (props) => {
     const [birthdayBanners, setBirthdayBanners] = useState([]);
     const [birthdayText, setBirthdayText] = useState([]);
     const [celebrants, setCelebrants] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [quiz, setQuiz] = useState([]);
+    const [user, setUser] = useState(null);
 
     const extractImages = (news: any, imageData: any) => {
         return imageData.filter((image: any) => news.Id === image.NewsContentId)
@@ -58,13 +64,19 @@ const Main: React.FC<any> = (props) => {
             getListItemsByTitle("Birthday Banners", "NewsletterId eq '" + news_letter.Id + "'"),
             getListItemsByTitle("Birthday Text", "NewsletterId eq '" + news_letter.Id + "'"),
             getListItemsByTitle("Birthday List", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("Events", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("Quiz", "NewsletterId eq '" + news_letter.Id + "'"),
+            currentUSer(),
         ])
-            .then(([news, images, employee, birthday_banner, birthday_text, birthdays]) => {
+            .then(([news, images, employee, birthday_banner, birthday_text, birthdays, events, quiz, user]) => {
                 extractNews(news, images);
                 setFeaturedEmployee(employee[0]);
                 setBirthdayBanners(birthday_banner);
                 setBirthdayText(birthday_text[0]);
                 setCelebrants(birthdays);
+                setEvents(events);
+                setQuiz(quiz);
+                setUser(user);
             })
             .catch((error) => {
                 console.log(error);
@@ -100,19 +112,30 @@ const Main: React.FC<any> = (props) => {
             <Section title={"New Joiners"} icon={"circle-plus"}>
                 <NewJoiners news_letter={news_letter}/>
             </Section>
-            <div className="spacer"></div>
+            <div className="spacer"/>
             <Section title={"Awards / Promotions"} icon={"briefcase"}>
                 <Movements news_letter={news_letter}/>
             </Section>
-            <div className="spacer"></div>
+            <div className="spacer"/>
             <Section title={"Awards and Recognitions"} icon={"trophy"}>
                 <Awards news_letter={news_letter}/>
             </Section>
-            <ShareYourStory/>
-            <div className="spacer"></div>
-            <div>Upcoming events</div>
-            <div className="spacer"></div>
-            <BrightIdeas/>
+            <ShareYourStory user={user}/>
+            <div className="spacer"/>
+            <Section title={"Upcoming Events"} icon={"calendar-days"}>
+                <UpcomingEvents events={events}/>
+            </Section>
+            <div className="spacer"/>
+            <BrightIdeas user={user}/>
+            <div className="spacer"/>
+            <Section>
+                <Stickers/>
+            </Section>
+            <div className="spacer"/>
+            <Section title={"Quiz"} icon={"circle-question"}>
+                <Quiz quiz={quiz} user={user}/>
+            </Section>
+            <div className="spacer"/>
         </main>
     );
 }

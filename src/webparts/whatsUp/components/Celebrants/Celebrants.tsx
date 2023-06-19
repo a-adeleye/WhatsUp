@@ -18,7 +18,7 @@ const Celebrants: React.FC<any> = (props) => {
             </div>
             <div className={"celebrants-wrapper"}>
                 {celebrants.map((item: any) => (
-                    <Celebrant celebrant={item}/>
+                    <Celebrant celebrant={item} key={item.Id}/>
                 ))}
             </div>
 

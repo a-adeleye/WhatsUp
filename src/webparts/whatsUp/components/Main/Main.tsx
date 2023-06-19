@@ -19,7 +19,7 @@ import Quiz from "../Quiz/Quiz";
 
 const Main: React.FC<any> = (props) => {
 
-    const {news_letter} = props;
+    const {news_letter, sections} = props;
 
     const [loading, setLoading] = useState(true);
     const [news, setNews] = useState([]);
@@ -85,7 +85,7 @@ const Main: React.FC<any> = (props) => {
 
     useEffect(() => {
         getData();
-    }, [news_letter]);
+    }, [news_letter, sections]);
 
     return (
         <main>

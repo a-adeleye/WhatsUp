@@ -12,21 +12,30 @@ AOS.init();
 const WhatsUp: React.FC<any> = () => {
 
     const [newsLetter, setNewsLetter] = useState<any>(null);
+    const [sections, setSections] = useState<any>([]);
 
-    const getNewsLetter = () => {
-        getListItemsByTitle("Newsletter", 'Published eq 1').then((response) => {
-            setNewsLetter(response[0]);
-        });
-    }
+    const getBaseData = (): void => {
+        Promise.all([
+            getListItemsByTitle('Newsletter', 'Published eq 1'),
+            getListItemsByTitle("Newsletter sections"),
+        ])
+            .then(([news_letter, sections]) => {
+                setNewsLetter(news_letter[0]);
+                setSections(sections);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     useEffect(() => {
-        getNewsLetter();
+        getBaseData();
     }, []);
 
     return (
         <body>
         <Header date={newsLetter?.Title}/>
-        <Main news_letter={newsLetter}/>
+        <Main news_letter={newsLetter} sections={sections}/>
         </body>
     );
 }

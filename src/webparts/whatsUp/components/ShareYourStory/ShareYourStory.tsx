@@ -6,7 +6,7 @@ import {faCertificate} from '@fortawesome/free-solid-svg-icons'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {addItem} from "../../Utils";
-import {Spinner} from "office-ui-fabric-react";
+import {DefaultButton, Dialog, DialogFooter, DialogType, PrimaryButton, Spinner} from "office-ui-fabric-react";
 
 library.add(faCertificate);
 
@@ -16,6 +16,7 @@ const ShareYourStory: React.FC<any> = (props) => {
     const [loading, setLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [hideDialog, setHideDialog] = useState(true);
 
     const handleChange = (event: any) => {
         const {value} = event.target;
@@ -23,18 +24,16 @@ const ShareYourStory: React.FC<any> = (props) => {
             delete story.Description;
             return;
         }
+        setIsError(false);
         setStory({Description: value.trim()});
     }
 
-    const handleSubmit = () => {
-        if (!Object.entries(story).length) {
-            setIsError(true)
-            return;
-        }
+    const submit = () => {
         setLoading(true);
         setIsError(false);
         story.Email = user.Email;
         story.Title = user.Title;
+        toggleDialog();
 
         addItem("Success Story", story).then(() => {
             setLoading(false);
@@ -44,26 +43,68 @@ const ShareYourStory: React.FC<any> = (props) => {
         });
     }
 
+    const dialogContentProps = {
+        type: DialogType.normal,
+        title: 'Confirm submission',
+        closeButtonAriaLabel: 'Close',
+        subText: 'Are you sure you want to submit?',
+    };
+
+    const dialogStyles = {main: {maxWidth: 450}};
+
+    const modalProps = React.useMemo(
+        () => ({
+            isBlocking: true,
+            styles: dialogStyles,
+        }),
+        [],
+    );
+
+    const toggleDialog = () => {
+        setHideDialog(!hideDialog);
+    }
+
+    const handleSubmit = () => {
+        if (!Object.entries(story).length) {
+            setIsError(true)
+            return;
+        }
+        toggleDialog();
+    }
+
     return (
-        <div className={"orange-section with-form"}>
-            <div className="container">
-                <div className="icon">
-                    <FontAwesomeIcon icon={"certificate"} size="xl"/>
+        <>
+            <div className={"orange-section with-form"}>
+                <div className="container">
+                    <div className="icon">
+                        <FontAwesomeIcon icon={"certificate"} size="xl"/>
+                    </div>
+                    <h1 className="title">SHARE YOUR SUCCESS STORY WITH JETEX!</h1>
+                    <div className="description">Do you have a success story in Jetex you&apos;d like to share with the
+                        others?
+                        You can submit your story (not more than 35 words) and get a chance to be featured in the next
+                        edition.
+                    </div>
+                    {isSubmitted && <p className={"success-message"}>Success story submitted successfully.</p>}
+                    {!isSubmitted && <form>
+                        {isError && <p className={"error-message"}>Please fill story.</p>}
+                        <textarea placeholder={"Success story"} onChange={(event) => handleChange(event)}/>
+                        <button onClick={handleSubmit} type={"button"}>Submit {loading && <Spinner/>}</button>
+                    </form>}
                 </div>
-                <h1 className="title">SHARE YOUR SUCCESS STORY WITH JETEX!</h1>
-                <div className="description">Do you have a success story in Jetex you&apos;d like to share with the
-                    others?
-                    You can submit your story (not more than 35 words) and get a chance to be featured in the next
-                    edition.
-                </div>
-                {isSubmitted && <p className={"success-message"}>Success story submitted successfully.</p>}
-                {!isSubmitted && <form>
-                    {isError && <p className={"error-message"}>Please fill story.</p>}
-                    <textarea placeholder={"Success story"} onChange={(event) => handleChange(event)}/>
-                    <button onClick={handleSubmit} type={"button"}>Submit {loading && <Spinner/>}</button>
-                </form>}
             </div>
-        </div>
+            <Dialog
+                hidden={hideDialog}
+                onDismiss={toggleDialog}
+                dialogContentProps={dialogContentProps}
+                modalProps={modalProps}
+            >
+                <DialogFooter>
+                    <PrimaryButton onClick={submit} text="Submit"/>
+                    <DefaultButton onClick={toggleDialog} text="Cancel"/>
+                </DialogFooter>
+            </Dialog>
+        </>
     )
 }
 

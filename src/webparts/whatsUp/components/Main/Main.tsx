@@ -19,7 +19,7 @@ import Quiz from "../Quiz/Quiz";
 
 const Main: React.FC<any> = (props) => {
 
-    const {news_letter, sections} = props;
+    const {news_letter} = props;
 
     const [loading, setLoading] = useState(true);
     const [news, setNews] = useState([]);
@@ -30,6 +30,9 @@ const Main: React.FC<any> = (props) => {
     const [events, setEvents] = useState([]);
     const [quiz, setQuiz] = useState([]);
     const [user, setUser] = useState(null);
+    const [movements, setMovements] = useState<any>([]);
+    const [newJoiners, setNewJoiners] = useState<any>([]);
+    const [awards, setAwards] = useState<any>([]);
 
     const extractImages = (news: any, imageData: any) => {
         return imageData.filter((image: any) => news.Id === image.NewsContentId)
@@ -66,9 +69,12 @@ const Main: React.FC<any> = (props) => {
             getListItemsByTitle("Birthday List", "NewsletterId eq '" + news_letter.Id + "'"),
             getListItemsByTitle("Events", "NewsletterId eq '" + news_letter.Id + "'"),
             getListItemsByTitle("Quiz", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("Movements", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("New Joiners", "NewsletterId eq '" + news_letter.Id + "'"),
+            getListItemsByTitle("Awards", "NewsletterId eq '" + news_letter.Id + "'"),
             currentUSer(),
         ])
-            .then(([news, images, employee, birthday_banner, birthday_text, birthdays, events, quiz, user]) => {
+            .then(([news, images, employee, birthday_banner, birthday_text, birthdays, events, quiz, movements, new_joiners, awards, user]) => {
                 extractNews(news, images);
                 setFeaturedEmployee(employee[0]);
                 setBirthdayBanners(birthday_banner);
@@ -76,6 +82,9 @@ const Main: React.FC<any> = (props) => {
                 setCelebrants(birthdays);
                 setEvents(events);
                 setQuiz(quiz);
+                setMovements(movements);
+                setNewJoiners(new_joiners);
+                setAwards(awards);
                 setUser(user);
             })
             .catch((error) => {
@@ -85,58 +94,60 @@ const Main: React.FC<any> = (props) => {
 
     useEffect(() => {
         getData();
-    }, [news_letter, sections]);
+    }, [news_letter]);
 
     return (
-        <main>
-            <Section title={"News Flash"} icon={"rss"}>
-                <div className={"text-center"}>
-                    {loading && <Spinner/>}
-                </div>
-                {news.slice(0, 2).map(item => (
-                    <News title={item.title}
-                          text={item.content}
-                          key={item.id}
-                          images={item.images}
-                    />
-                ))}
-            </Section>
-            <Section title={"Featured Employees"} icon={"user"}>
-                <FeaturedEmployee employee={featuredEmployee}/>
-            </Section>
-            <Section title={"Birthdays"} icon={"cake-candles"}>
-                <BirthDayBanner data={birthdayBanners} birthday_text={birthdayText} celebrants={celebrants}
-                                news_letter={news_letter}/>
-            </Section>
-            <ScamAwareness/>
-            <Section title={"New Joiners"} icon={"circle-plus"}>
-                <NewJoiners news_letter={news_letter}/>
-            </Section>
-            <div className="spacer"/>
-            <Section title={"Awards / Promotions"} icon={"briefcase"}>
-                <Movements news_letter={news_letter}/>
-            </Section>
-            <div className="spacer"/>
-            <Section title={"Awards and Recognitions"} icon={"trophy"}>
-                <Awards news_letter={news_letter}/>
-            </Section>
-            <ShareYourStory user={user}/>
-            <div className="spacer"/>
-            <Section title={"Upcoming Events"} icon={"calendar-days"}>
-                <UpcomingEvents events={events}/>
-            </Section>
-            <div className="spacer"/>
-            <BrightIdeas user={user}/>
-            <div className="spacer"/>
-            <Section>
-                <Stickers/>
-            </Section>
-            <div className="spacer"/>
-            <Section title={"Quiz"} icon={"circle-question"}>
-                <Quiz quiz={quiz} user={user}/>
-            </Section>
-            <div className="spacer"/>
-        </main>
+        <>
+            {loading && <div className={"page-loader"}>
+                <Spinner size={3}/>
+            </div>}
+            {!loading && <main>
+                <Section title={"News Flash"} icon={"rss"}>
+                    {news.slice(0, 2).map(item => (
+                        <News title={item.title}
+                              text={item.content}
+                              key={item.id}
+                              images={item.images}
+                        />
+                    ))}
+                </Section>
+                <Section title={"Featured Employees"} icon={"user"}>
+                    <FeaturedEmployee employee={featuredEmployee}/>
+                </Section>
+                <Section title={"Birthdays"} icon={"cake-candles"}>
+                    <BirthDayBanner data={birthdayBanners} birthday_text={birthdayText} celebrants={celebrants}
+                                    news_letter={news_letter}/>
+                </Section>
+                <ScamAwareness/>
+                <Section title={"New Joiners"} icon={"circle-plus"}>
+                    <NewJoiners new_joiners={newJoiners}/>
+                </Section>
+                <div className="spacer"/>
+                <Section title={"Movements / Promotions"} icon={"briefcase"}>
+                    <Movements movements={movements}/>
+                </Section>
+                <div className="spacer"/>
+                <Section title={"Awards and Recognitions"} icon={"trophy"}>
+                    <Awards awards={awards}/>
+                </Section>
+                <ShareYourStory user={user}/>
+                <div className="spacer"/>
+                <Section title={"Upcoming Events"} icon={"calendar-days"}>
+                    <UpcomingEvents events={events}/>
+                </Section>
+                <div className="spacer"/>
+                <BrightIdeas user={user}/>
+                <div className="spacer"/>
+                <Section>
+                    <Stickers/>
+                </Section>
+                <div className="spacer"/>
+                <Section title={"Quiz"} icon={"circle-question"}>
+                    <Quiz quiz={quiz} user={user}/>
+                </Section>
+                <div className="spacer"/>
+            </main>}
+        </>
     );
 }
 

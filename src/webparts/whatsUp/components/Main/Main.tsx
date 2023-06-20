@@ -18,10 +18,11 @@ import Quiz from "../Quiz/Quiz";
 
 const Main: React.FC<any> = (props) => {
 
-    const {news_letter} = props;
+    const {news_letter, sections} = props;
+
+    console.log(sections)
 
     const [user, setUser] = useState(null);
-
 
     const getUser = (): void => {
         currentUSer().then((response) => {
@@ -38,42 +39,42 @@ const Main: React.FC<any> = (props) => {
 
     return (
         <main>
-            <Section title={"News Flash"} icon={"rss"}>
+            {sections["News Flash"] && <Section title={"News Flash"} icon={"rss"}>
                 <News news_letter={news_letter}/>
-            </Section>
-            <Section title={"Featured Employees"} icon={"user"}>
+            </Section>}
+            {sections["Feature Employee"] && <Section title={"Featured Employees"} icon={"user"}>
                 <FeaturedEmployee news_letter={news_letter}/>
-            </Section>
-            <Section title={"Birthdays"} icon={"cake-candles"}>
+            </Section>}
+            {sections["Birthday"] && <Section title={"Birthdays"} icon={"cake-candles"}>
                 <BirthDayBanner news_letter={news_letter}/>
-            </Section>
-            <ScamAwareness/>
-            <Section title={"New Joiners"} icon={"circle-plus"}>
+            </Section>}
+            {sections["Scam Notification"] && <ScamAwareness/>}
+            {sections["New Joiners"] && <Section title={"New Joiners"} icon={"circle-plus"}>
                 <NewJoiners news_letter={news_letter}/>
-            </Section>
+            </Section>}
             <div className="spacer"/>
-            <Section title={"Movements / Promotions"} icon={"briefcase"}>
+            {sections["Movements / Promotions"] && <Section title={"Movements / Promotions"} icon={"briefcase"}>
                 <Movements news_letter={news_letter}/>
-            </Section>
+            </Section>}
             <div className="spacer"/>
-            <Section title={"Awards and Recognitions"} icon={"trophy"}>
+            {sections["Awards and Recognitions"] && <Section title={"Awards and Recognitions"} icon={"trophy"}>
                 <Awards news_letter={news_letter}/>
-            </Section>
-            <ShareYourStory user={user}/>
+            </Section>}
+            {sections["Success Story"] && <ShareYourStory user={user}/>}
             <div className="spacer"/>
-            <Section title={"Upcoming Events"} icon={"calendar-days"}>
+            {sections["Events"] && <Section title={"Upcoming Events"} icon={"calendar-days"}>
                 <UpcomingEvents news_letter={news_letter}/>
-            </Section>
+            </Section>}
             <div className="spacer"/>
-            <BrightIdeas user={user}/>
+            {sections["Sugession"] && <BrightIdeas user={user}/>}
             <div className="spacer"/>
-            <Section>
+            {sections["JETEX Gifs"] && <Section>
                 <Stickers/>
-            </Section>
+            </Section>}
             <div className="spacer"/>
-            <Section title={"Quiz"} icon={"circle-question"}>
+            {sections["Quiz"] && <Section title={"Quiz"} icon={"circle-question"}>
                 <Quiz news_letter={news_letter} user={user}/>
-            </Section>
+            </Section>}
             <div className="spacer"/>
         </main>
     );

@@ -16,6 +16,15 @@ const WhatsUp: React.FC<any> = () => {
     const [sections, setSections] = useState<any>([]);
     const [loading, setLoading] = useState(true);
 
+    const extractSections = (data: any[]) => {
+        const sections: any = {};
+        data.forEach(item => {
+            sections[item.Title] = item.Visible;
+        });
+        setSections(sections);
+        setLoading(false);
+    };
+
     const getBaseData = (): void => {
         Promise.all([
             getListItemsByTitle('Newsletter', 'Published eq 1'),
@@ -23,11 +32,11 @@ const WhatsUp: React.FC<any> = () => {
         ])
             .then(([news_letter, sections]) => {
                 setNewsLetter(news_letter[0]);
-                setSections(sections);
-                setLoading(false);
+                extractSections(sections);
             })
             .catch((error) => {
                 console.log(error);
+                setLoading(false);
             });
     };
 

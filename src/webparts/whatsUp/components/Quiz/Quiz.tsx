@@ -1,17 +1,35 @@
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import './Quiz.scss';
 import {DefaultButton, Dialog, DialogFooter, DialogType, Image, PrimaryButton, Spinner} from "office-ui-fabric-react";
-import {addItem, extractImageUrl} from "../../Utils";
+import {addItem, extractImageUrl, getListItemsByTitle} from "../../Utils";
 
 
 const Quiz: React.FC<any> = (props) => {
-    const {quiz, user} = props;
+    const {news_letter, user} = props;
+    const [quiz, setQuiz] = useState([]);
     const [answer, setAnswer] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [hideDialog, setHideDialog] = useState(true);
+    const [errorMessage, setErrorMessage] = useState(null);
+
+    const getData = () => {
+        if (!news_letter) {
+            return;
+        }
+        getListItemsByTitle("Quiz", "NewsletterId eq '" + news_letter.Id + "'")
+            .then((response) => {
+                setQuiz(response);
+                setLoading(false);
+            })
+    }
+
+    useEffect(() => {
+        getData();
+    }, [news_letter])
 
     const handleChange = (event: any) => {
         const {id, value} = event.target;
@@ -20,6 +38,7 @@ const Quiz: React.FC<any> = (props) => {
             return;
         }
         setIsError(false);
+        setErrorMessage(null);
         setAnswer({
             ...answer,
             [id]: value.trim()
@@ -27,17 +46,21 @@ const Quiz: React.FC<any> = (props) => {
     }
 
     const submit = () => {
-        setLoading(true);
+        setSubmitting(true);
         setIsError(false);
+        setErrorMessage(null);
         answer.Email = user.Email;
         answer.Name = user.Title;
-        setIsSubmitted(true);
+        answer.QuizID = String(quiz[0].Id);
+
+        toggleDialog();
 
         addItem("QuizData", answer).then(() => {
-            setLoading(false);
-            toggleDialog();
+            setSubmitting(false);
+            setIsSubmitted(true);
         }).catch((error) => {
-            console.log(error)
+            console.log(error);
+            setErrorMessage('Unable to submit quiz. Please try again');
         });
     }
 
@@ -72,11 +95,14 @@ const Quiz: React.FC<any> = (props) => {
 
     return (
         <>
+            {loading && <div className={"text-center"}>
+                <Spinner size={3}/>
+            </div>}
             <div className={"quiz"}>
-                {quiz.map((item: any, index: number) => (
+                {quiz.map((item: any) => (
                     <>
                         <p className="heading">{item.QuizQuestion}</p>
-                        <div className="quiz-wrapper" key={index}>
+                        <div className="quiz-wrapper" key={item.Id}>
                             <div className="quiz-item">
                                 <Image src={extractImageUrl(item.Image1)} alt={"quiz-image"}/>
                                 <p className="title">1</p>
@@ -91,20 +117,20 @@ const Quiz: React.FC<any> = (props) => {
                             </div>
                         </div>
                         <p className="last-winner">The winner will be selected at random from all correct entries and
-                            will
-                            receive a gift voucher.<br/>
+                            will receive a gift voucher.<br/>
                             Last month's winner was <strong>{item?.LastWinner}</strong>
                         </p>
                         {isSubmitted && <p className={"success-message"}>Quiz submitted successfully.</p>}
                         {!isSubmitted && <form action="">
                             {isError && <p className={"error-message"}>Please answer all questions.</p>}
+                            {errorMessage && <p className={"error-message"}>{errorMessage}</p>}
                             <input id={"Answer1"} type={"text"} placeholder={"Answer 1*"}
                                    onChange={(event) => handleChange(event)}/>
                             <input id={"Answer2"} type={"text"} placeholder={"Answer 2*"}
                                    onChange={(event) => handleChange(event)}/>
                             <input id={"Answer3"} type={"text"} placeholder={"Answer 3*"}
                                    onChange={(event) => handleChange(event)}/>
-                            <button disabled={!answer} onClick={handleSubmit} type={"button"}>Submit {loading &&
+                            <button disabled={!answer} onClick={handleSubmit} type={"button"}>Submit {submitting &&
                                 <Spinner/>}</button>
                         </form>}
                     </>

@@ -13,6 +13,8 @@ const BrightIdeas: React.FC<any> = (props) => {
     const [isError, setIsError] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [hideDialog, setHideDialog] = useState(true);
+    const [errorMessage, setErrorMessage] = useState(null);
+
 
     const handleChange = (event: any) => {
         const {value} = event.target;
@@ -21,12 +23,15 @@ const BrightIdeas: React.FC<any> = (props) => {
             return;
         }
         setIsError(false);
+        setErrorMessage(null);
         setIdea({Description: value.trim()});
     }
 
     const submit = () => {
         setLoading(true);
         setIsError(false);
+        setErrorMessage(null);
+
         idea.Email = user.Email;
         idea.Title = user.Title;
 
@@ -37,6 +42,8 @@ const BrightIdeas: React.FC<any> = (props) => {
             setIsSubmitted(true);
         }).catch((error) => {
             console.log(error)
+            setLoading(false);
+            setErrorMessage('Unable to submit idea. Please try again');
         });
     }
 
@@ -83,6 +90,7 @@ const BrightIdeas: React.FC<any> = (props) => {
                     {isSubmitted && <p className={"success-message"}>Idea submitted successfully.</p>}
                     {!isSubmitted && <form>
                         {isError && <p className={"error-message"}>Please fill idea.</p>}
+                        {errorMessage && <p className={"error-message"}>{errorMessage}</p>}
                         <textarea placeholder={"Enter your idea"} onChange={(event) => handleChange(event)}/>
                         <button onClick={handleSubmit} type={"button"}>Submit {loading && <Spinner/>}</button>
                     </form>}

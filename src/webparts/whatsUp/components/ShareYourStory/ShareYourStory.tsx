@@ -17,6 +17,7 @@ const ShareYourStory: React.FC<any> = (props) => {
     const [isError, setIsError] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [hideDialog, setHideDialog] = useState(true);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const handleChange = (event: any) => {
         const {value} = event.target;
@@ -25,21 +26,26 @@ const ShareYourStory: React.FC<any> = (props) => {
             return;
         }
         setIsError(false);
+        setErrorMessage(null);
         setStory({Description: value.trim()});
     }
 
     const submit = () => {
         setLoading(true);
         setIsError(false);
+        setErrorMessage(null);
         story.Email = user.Email;
         story.Title = user.Title;
+
         toggleDialog();
 
         addItem("Success Story", story).then(() => {
             setLoading(false);
             setIsSubmitted(true);
         }).catch((error) => {
+            setLoading(false);
             console.log(error)
+            setErrorMessage('Unable to submit story. Please try again');
         });
     }
 
@@ -88,6 +94,7 @@ const ShareYourStory: React.FC<any> = (props) => {
                     {isSubmitted && <p className={"success-message"}>Success story submitted successfully.</p>}
                     {!isSubmitted && <form>
                         {isError && <p className={"error-message"}>Please fill story.</p>}
+                        {errorMessage && <p className={"error-message"}>{errorMessage}</p>}
                         <textarea placeholder={"Success story"} onChange={(event) => handleChange(event)}/>
                         <button onClick={handleSubmit} type={"button"}>Submit {loading && <Spinner/>}</button>
                     </form>}

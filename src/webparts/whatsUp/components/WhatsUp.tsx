@@ -3,12 +3,9 @@ import {useEffect, useState} from 'react';
 import Header from "./Header/Header";
 import './WhatsUp.scss';
 import Main from "./Main/Main";
-import AOS from 'aos';
 import {getListItemsByTitle} from "../Utils";
 import {Spinner} from "office-ui-fabric-react";
 
-
-AOS.init();
 
 const WhatsUp: React.FC<any> = () => {
 

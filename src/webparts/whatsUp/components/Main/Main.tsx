@@ -50,26 +50,20 @@ const Main: React.FC<any> = (props) => {
             {sections["New Joiners"] && <Section title={"New Joiners"} icon={"circle-plus"}>
                 <NewJoiners news_letter={news_letter}/>
             </Section>}
-            <div className="spacer"/>
             {sections["Movements / Promotions"] && <Section title={"Movements / Promotions"} icon={"briefcase"}>
                 <Movements news_letter={news_letter}/>
             </Section>}
-            <div className="spacer"/>
             {sections["Awards and Recognitions"] && <Section title={"Awards and Recognitions"} icon={"trophy"}>
                 <Awards news_letter={news_letter}/>
             </Section>}
             {sections["Success Story"] && <ShareYourStory user={user}/>}
-            <div className="spacer"/>
             {sections["Events"] && <Section title={"Upcoming Events"} icon={"calendar-days"}>
                 <UpcomingEvents news_letter={news_letter}/>
             </Section>}
-            <div className="spacer"/>
             {sections["Sugession"] && <BrightIdeas user={user}/>}
-            <div className="spacer"/>
             {sections["JETEX Gifs"] && <Section>
                 <Stickers/>
             </Section>}
-            <div className="spacer"/>
             {sections["Quiz"] && <Section title={"Quiz"} icon={"circle-question"}>
                 <Quiz news_letter={news_letter} user={user}/>
             </Section>}

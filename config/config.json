@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "whats-up-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/whatsUp/WhatsUpWebPart.js",
+          "manifest": "./src/webparts/whatsUp/WhatsUpWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "WhatsUpWebPartStrings": "lib/webparts/whatsUp/loc/{locale}.js"
+  }
+}

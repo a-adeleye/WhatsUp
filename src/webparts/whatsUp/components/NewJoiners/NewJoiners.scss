@@ -1,0 +1,16 @@
+.new-joiners {
+  display: flex;
+  column-gap: 1em;
+  row-gap: 4em;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.welcome {
+  padding: 40px 0 0;
+
+  img {
+    max-width: 100%;
+  }
+}

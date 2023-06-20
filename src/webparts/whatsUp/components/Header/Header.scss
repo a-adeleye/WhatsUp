@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-image {
+    text-align: center;
+    flex: 1;
+
+    img {
+      height: 76px;
+      width: auto;
+    }
+  }
+
+  .title {
+    font-family: Josefin Sans, serif;
+
+    .date {
+      text-transform: capitalize;
+    }
+  }
+}
+
+h4 {
+  margin-bottom: .5em;
+  margin-top: 0;
+  text-align: right;
+}
+

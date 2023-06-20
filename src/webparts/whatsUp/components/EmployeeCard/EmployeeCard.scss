@@ -1,0 +1,35 @@
+.employee-card {
+  width: 40%;
+  min-width: 350px;
+  display: flex;
+  gap: 1em;
+  align-items: stretch;
+  padding: 24px 16px 32px;
+  transition: .3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  z-index: 1;
+  background-color: #fff;
+
+  .details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+  }
+
+  .image {
+    width: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.employee-card:hover {
+  transform: scale(1.1);
+}

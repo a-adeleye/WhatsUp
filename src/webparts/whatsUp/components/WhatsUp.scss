@@ -1,0 +1,56 @@
+@import "~aos/src/sass/aos";
+
+:root {
+  --primary: #ff6900;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto 100px;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.primary-text {
+  color: var(--primary);
+}
+
+.success-message {
+  background: #3a693a;
+}
+
+.error-message,
+.success-message {
+  padding: 1em 2em;
+  border-radius: 8px;
+  width: max-content;
+  color: #fff;
+  font-size: 22px;
+  margin: auto;
+}
+
+.error-message {
+  background: #ed1f4e;
+}

@@ -80,7 +80,7 @@ const ShareYourStory: React.FC<any> = (props) => {
 
     return (
         <>
-            <div className={"orange-section with-form"}>
+            <div className={"orange-section with-form"} data-aos="fade-up">
                 <div className="container">
                     <div className="icon">
                         <FontAwesomeIcon icon={"certificate"} size="xl"/>

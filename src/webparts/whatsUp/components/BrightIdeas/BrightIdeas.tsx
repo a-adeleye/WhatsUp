@@ -78,7 +78,7 @@ const BrightIdeas: React.FC<any> = (props) => {
 
     return (
         <>
-            <div className={"orange-section with-form"}>
+            <div className={"orange-section with-form"} data-aos="fade-up">
                 <div className="container">
                     <div className="icon">
                         <img alt="" src={require('../../assets/ideas.png')}/>

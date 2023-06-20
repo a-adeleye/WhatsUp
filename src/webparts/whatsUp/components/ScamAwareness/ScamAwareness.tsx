@@ -10,7 +10,7 @@ library.add(faTriangleExclamation);
 
 const ScamAwareness: React.FC<any> = () => {
     return (
-        <div className={"orange-section"}>
+        <div className={"orange-section"} data-aos="fade-up">
             <div className="container">
                 <div className="icon">
                     <FontAwesomeIcon icon={"triangle-exclamation"} size="xl"/>

@@ -18,7 +18,7 @@ library.add(faUser, faRss, faCakeCandles, faCirclePlus, faTrophy, faBriefcase, f
 const Section: React.FC<any> = (props) => {
     const {title, icon, children} = props;
     return (
-        <section data-aos="fade-up" className={title ? "container" : "container no-padding"}>
+        <section className={title ? "container" : "container no-padding"}>
             {title && <div className={"section-title"}>
                 <FontAwesomeIcon icon={icon} size="xl"/>
                 <h2>{title}</h2>

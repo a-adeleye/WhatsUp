@@ -1,4 +1,4 @@
-section {
+.section {
   background-color: #fff;
   border: 1px solid #e6e9f0;
   box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
@@ -27,6 +27,6 @@ section {
   }
 }
 
-section.container.no-padding {
+.section.container.no-padding {
   padding-top: 0;
 }

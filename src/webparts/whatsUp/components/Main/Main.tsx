@@ -20,8 +20,6 @@ const Main: React.FC<any> = (props) => {
 
     const {news_letter, sections} = props;
 
-    console.log(sections)
-
     const [user, setUser] = useState(null);
 
     const getUser = (): void => {

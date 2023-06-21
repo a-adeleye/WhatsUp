@@ -5,21 +5,21 @@
   box-shadow: 4px 4px 10px rgba(0, 0, 0, .2);
   border-radius: 8px;
   padding: 1em;
-  max-width: 165px;
-  min-width: 165px;
+  max-width: 160px;
+  min-width: 155px;
   transition: .3s ease;
 }
 
 .celebrant-image {
-  height: 175px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
+  height: 175px;
 
   img {
     max-width: 100%;
-    height: 175px;
+    height: 100%;
     object-fit: contain;
   }
 }
@@ -52,8 +52,9 @@
 
 .birth-date {
   position: absolute;
-  top: 180px;
-  left: 67px;
+  margin-top: -.5em;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: var(--primary);
   padding: .1em .5em;
   border-radius: 4px;
@@ -64,4 +65,18 @@
 .celebrant:hover {
   transform: scale(1.1);
   z-index: 1;
+}
+
+@media (max-width: 476px) {
+  .celebrant {
+    max-width: unset;
+
+    .celebrant-image {
+      height: auto;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
 }

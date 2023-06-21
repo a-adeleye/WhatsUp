@@ -58,7 +58,7 @@ const News: React.FC<any> = (props) => {
             </div>}
             {news.map((item: any) => (
                 <div className={"news"} key={item.id}>
-                    <div className={"news-title"}>
+                    <div className={"subtitle"}>
                         <h2>{item.title}</h2>
                     </div>
                     <Carousel images={item.images}/>

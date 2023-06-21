@@ -1,23 +1,6 @@
 .celebrants {
   position: relative;
   margin-top: 20px;
-
-  .celebrants-title {
-    width: max-content;
-    background-color: #fff;
-    margin-left: -60px;
-    margin-bottom: 18px;
-    padding: 10px 20px 10px 10px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-    text-transform: capitalize;
-    color: #000;
-    font-family: Josefin Sans, serif;
-
-    h2 {
-      margin: 0;
-      font-size: 30px;
-    }
-  }
 }
 
 .celebrants-animated {

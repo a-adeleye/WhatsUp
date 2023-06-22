@@ -45,6 +45,10 @@ const Quiz: React.FC<any> = (props) => {
         });
     }
 
+    const toggleDialog = () => {
+        setHideDialog(!hideDialog);
+    }
+
     const submit = () => {
         setSubmitting(true);
         setIsError(false);
@@ -89,10 +93,6 @@ const Quiz: React.FC<any> = (props) => {
         [],
     );
 
-    const toggleDialog = () => {
-        setHideDialog(!hideDialog);
-    }
-
     return (
         <>
             {loading && <div className={"text-center"}>
@@ -118,7 +118,7 @@ const Quiz: React.FC<any> = (props) => {
                         </div>
                         <p className="last-winner">The winner will be selected at random from all correct entries and
                             will receive a gift voucher.<br/>
-                            Last month's winner was <strong>{item?.LastWinner}</strong>
+                            Last month&apos;s winner was <strong>{item?.LastWinner}</strong>
                         </p>
                         {isSubmitted && <p className={"success-message"}>Quiz submitted successfully.</p>}
                         {!isSubmitted && <form action="">

@@ -27,6 +27,10 @@ const BrightIdeas: React.FC<any> = (props) => {
         setIdea({Description: value.trim()});
     }
 
+    const toggleDialog = () => {
+        setHideDialog(!hideDialog);
+    }
+
     const submit = () => {
         setLoading(true);
         setIsError(false);
@@ -45,10 +49,6 @@ const BrightIdeas: React.FC<any> = (props) => {
             setLoading(false);
             setErrorMessage('Unable to submit idea. Please try again');
         });
-    }
-
-    const toggleDialog = () => {
-        setHideDialog(!hideDialog);
     }
 
     const handleSubmit = () => {

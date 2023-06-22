@@ -1,4 +1,4 @@
-@import "~aos/src/sass/aos";
+@import '../../../styles/font';
 
 :root {
   --primary: #ff6900;
@@ -8,8 +8,17 @@ body,
 main,
 .section,
 .subtitle,
-div {
-  font-family: Josefin Sans, serif;
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p, small,
+strong,
+{
+  font-family: '' Josefin Sans '';
 }
 
 .container {
@@ -66,7 +75,7 @@ div {
   background-color: #fff;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, .2);
   color: #000;
-  font-family: Josefin Sans, serif;
+  font-family: 'Josefin Sans', serif;
   font-size: 36px;
   line-height: .9;
   margin-bottom: 18px;

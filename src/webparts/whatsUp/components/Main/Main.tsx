@@ -43,7 +43,7 @@ const Main: React.FC<any> = (props) => {
             {sections["Feature Employee"] && <Section title={"Featured Employees"} icon={"user"}>
                 <FeaturedEmployee news_letter={news_letter}/>
             </Section>}
-            {sections["Birthday"] && <Section title={"Birthdays"} icon={"cake-candles"}>
+            {sections.Birthday && <Section title={"Birthdays"} icon={"cake-candles"}>
                 <BirthDayBanner news_letter={news_letter}/>
             </Section>}
             {sections["Scam Notification"] && <ScamAwareness/>}
@@ -57,14 +57,14 @@ const Main: React.FC<any> = (props) => {
                 <Awards news_letter={news_letter}/>
             </Section>}
             {sections["Success Story"] && <ShareYourStory user={user}/>}
-            {sections["Events"] && <Section title={"Upcoming Events"} icon={"calendar-days"}>
+            {sections.Events && <Section title={"Upcoming Events"} icon={"calendar-days"}>
                 <UpcomingEvents news_letter={news_letter}/>
             </Section>}
-            {sections["Sugession"] && <BrightIdeas user={user}/>}
+            {sections.Sugession && <BrightIdeas user={user}/>}
             {sections["JETEX Gifs"] && <Section>
                 <Stickers/>
             </Section>}
-            {sections["Quiz"] && <Section title={"Quiz"} icon={"circle-question"}>
+            {sections.Quiz && <Section title={"Quiz"} icon={"circle-question"}>
                 <Quiz news_letter={news_letter} user={user}/>
             </Section>}
             <div className="spacer"/>

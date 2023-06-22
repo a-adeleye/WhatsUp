@@ -30,6 +30,10 @@ const ShareYourStory: React.FC<any> = (props) => {
         setStory({Description: value.trim()});
     }
 
+    const toggleDialog = () => {
+        setHideDialog(!hideDialog);
+    }
+
     const submit = () => {
         setLoading(true);
         setIsError(false);
@@ -65,10 +69,6 @@ const ShareYourStory: React.FC<any> = (props) => {
         }),
         [],
     );
-
-    const toggleDialog = () => {
-        setHideDialog(!hideDialog);
-    }
 
     const handleSubmit = () => {
         if (!Object.entries(story).length) {

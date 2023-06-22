@@ -11,17 +11,21 @@
     margin-top: 70px;
     text-align: left;
     line-height: 25px;
-    font-family: Calibri, Arial, Helvetica, sans-serif;
+    font-family: 'Josefin Sans', serif;
 
     span {
       color: #333333 !important;
       line-height: 25px !important;
-      font-family: Calibri, Arial, Helvetica, sans-serif !important;
+      font-family: 'Josefin Sans', serif !important;
     }
 
     a {
-      color: #ff6900;
+      color: #ff6900 !important;
       text-decoration: none;
+
+      span {
+        color: #ff6900 !important;
+      }
     }
   }
 }

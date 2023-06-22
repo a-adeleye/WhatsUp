@@ -37,3 +37,9 @@
   transform: scale(1.1);
   z-index: 1;
 }
+
+@media (max-width: 476px) {
+  .upcoming-events .event {
+    min-width: 85%;
+  }
+}

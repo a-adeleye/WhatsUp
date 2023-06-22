@@ -10,7 +10,7 @@ const Celebrants: React.FC<any> = (props) => {
     }
     return (
         <div className={"celebrants"}>
-            <div className={"celebrants-title"}>
+            <div className={"subtitle"}>
                 <h2>{month()} Celebrants</h2>
             </div>
             <div className={"celebrants-animated"}>

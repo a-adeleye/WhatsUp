@@ -4,7 +4,7 @@ import './Header.scss';
 const Header: React.FC<any> = (props) => {
     const {date} = props;
     return (
-        <div className="container">
+        <div className="header container">
             <header>
                 <div className={"header-image"}>
                     <img alt="" src={require('../../assets/Whatsup-logo.png')}/>

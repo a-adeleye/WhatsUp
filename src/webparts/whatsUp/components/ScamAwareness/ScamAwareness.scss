@@ -94,7 +94,8 @@
     align-items: center;
     gap: 25px;
     min-height: 325px;
-    width: 450px;
+    width: 100%;
+    max-width: 450px;
     margin: auto;
 
     input {
@@ -120,5 +121,11 @@
     textarea {
       padding-top: 10px;
     }
+  }
+}
+
+@media (max-width: 476px) {
+  .orange-section {
+    padding: 120px 40px 25px;
   }
 }

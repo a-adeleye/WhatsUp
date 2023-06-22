@@ -5,3 +5,17 @@
 .birthday-text {
   font-size: 20px;
 }
+
+@media (max-width: 476px) {
+  .birthday-banner {
+    padding: 20px 16px;
+  }
+
+  .celebrant {
+    max-width: unset;
+
+    .celebrant-image {
+      height: auto;
+    }
+  }
+}

@@ -17,6 +17,7 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({images}) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    // const [autoplayTimeout, setAutoplayTimeout] = useState<number| null>(null);
 
     const nextImage = (event: any) => {
         event.stopPropagation();
@@ -55,6 +56,22 @@ const Carousel: React.FC<CarouselProps> = ({images}) => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [isPopupOpen]);
+
+    // useEffect(() => {
+    //     const autoplay = () => {
+    //         setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    //     };
+    //
+    //     const timeout = setTimeout(autoplay, 3000);
+    //
+    //     setAutoplayTimeout(timeout);
+    //
+    //     return () => {
+    //         if (autoplayTimeout) {
+    //             clearTimeout(autoplayTimeout);
+    //         }
+    //     };
+    // }, [currentImageIndex, images.length]);
 
     return (
         <>

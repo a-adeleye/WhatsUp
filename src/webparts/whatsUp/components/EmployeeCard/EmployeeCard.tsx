@@ -5,8 +5,7 @@ import {extractImageUrl} from "../../Utils";
 
 const EmployeeCard: React.FC<any> = (props) => {
 
-    const {employee} = props;
-
+    const {employee, type} = props;
 
     return (
         <div className={"employee-card"}>
@@ -18,8 +17,9 @@ const EmployeeCard: React.FC<any> = (props) => {
             <div className="details">
                 <b>{employee?.EmployeeName}</b>
                 <span>{employee?.Location}</span>
-                <span>{employee?.Title}</span>
+                {type === 'title' && <span>{employee?.Title}</span>}
                 <span>{employee?.Department}</span>
+                {type === 'description' && <span>{employee?.Description}</span>}
             </div>
         </div>
     )

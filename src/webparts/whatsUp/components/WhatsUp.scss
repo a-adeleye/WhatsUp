@@ -58,13 +58,13 @@
   color: #000;
   font-family: 'Josefin Sans', serif;
   font-size: 36px;
-  line-height: .9;
   margin-bottom: 18px;
   margin-left: -60px;
   padding: 20px 55px 16px 30px;
   text-transform: capitalize;
   width: max-content;
   max-width: 650px;
+  line-height: 1.2;
 
   h2 {
     margin: 0;
@@ -74,7 +74,6 @@
 
 @media (max-width: 768px) {
   .subtitle {
-    line-height: 1.2;
     width: 460px;
     margin-left: -28px;
 

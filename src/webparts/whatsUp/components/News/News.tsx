@@ -56,6 +56,7 @@ const News: React.FC<any> = (props) => {
             {loading && <div className={"text-center"}>
                 <Spinner size={3}/>
             </div>}
+
             {news.map((item: any) => (
                 <div className={"news"} key={item.id}>
                     <div className={"subtitle"}>

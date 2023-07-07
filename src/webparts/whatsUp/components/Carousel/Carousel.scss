@@ -5,6 +5,11 @@
     width: 100%;
     cursor: pointer;
   }
+
+
+  .carousel-image {
+    transition: all 2ms ease-in-out;
+  }
 }
 
 .carousel-button {
@@ -19,10 +24,6 @@
   height: 40px;
   width: 40px;
   cursor: pointer;
-}
-
-.carousel-image {
-  transition: all .2ms ease;
 }
 
 .previous {
@@ -59,3 +60,33 @@
   margin: 0 auto;
 }
 
+
+@media only screen and (max-width: 600px) {
+  .carousel {
+    height: 155.266px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .carousel {
+    height: 234.719px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel {
+    height: 304.719px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .carousel {
+    height: 401.328px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .carousel {
+    height: 485.328px;
+  }
+}

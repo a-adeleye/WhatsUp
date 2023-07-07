@@ -35,7 +35,7 @@ const Movements: React.FC<any> = (props) => {
             </div>}
             <div className={"new-joiners"}>
                 {movements.map((item: any) => (
-                    <EmployeeCard employee={item} key={item.Id}/>
+                    <EmployeeCard employee={item} key={item.Id} type={'title'}/>
                 ))}
             </div>
         </>

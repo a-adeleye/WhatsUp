@@ -36,7 +36,7 @@ const NewJoiners: React.FC<any> = (props) => {
             </div>}
             <div className={"new-joiners"}>
                 {newJoiners.map((item: any) => (
-                    <EmployeeCard employee={item} key={item.Id}/>
+                    <EmployeeCard employee={item} key={item.Id} type={'title'}/>
                 ))}
             </div>
             <div className={"welcome"}>

@@ -34,7 +34,7 @@ const Awards: React.FC<any> = (props) => {
             </div>}
             <div className={"new-joiners"}>
                 {awards.map((item: any) => (
-                    <EmployeeCard employee={item} key={item.Id}/>
+                    <EmployeeCard employee={item} key={item.Id} type={'description'}/>
                 ))}
             </div>
         </>

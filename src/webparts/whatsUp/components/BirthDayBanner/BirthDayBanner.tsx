@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import "./BirthDayBanner.scss";
-import Carousel from "../Carousel/Carousel";
+import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import {extractImageUrl, getListItemsByTitle} from "../../Utils";
 import Celebrants from "../Celebrants/Celebrants";
 import {Spinner} from "office-ui-fabric-react";
@@ -57,7 +57,7 @@ const BirthDayBanner: React.FC<any> = (props) => {
             </div>}
             <div className={"birthday-banner"}>
                 <p className={"birthday-text"}>{birthdayText?.Title}</p>
-                <Carousel images={images}/>
+                <ImageCarousel images={images}/>
                 <Celebrants celebrants={celebrants} news_letter={news_letter}/>
             </div>
         </>

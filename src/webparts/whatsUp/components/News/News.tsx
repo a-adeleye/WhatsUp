@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import './News.scss';
-import Carousel from "../Carousel/Carousel";
+import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import {extractImageUrl, getListItemsByTitle} from "../../Utils";
 import {Spinner} from "office-ui-fabric-react";
 
@@ -62,7 +62,7 @@ const News: React.FC<any> = (props) => {
                     <div className={"subtitle"}>
                         <h2>{item.title}</h2>
                     </div>
-                    <Carousel images={item.images}/>
+                    <ImageCarousel images={item.images}/>
                     <div className={"text"} dangerouslySetInnerHTML={{__html: item.content}}/>
                 </div>))
             }

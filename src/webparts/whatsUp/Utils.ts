@@ -50,6 +50,17 @@ export const getListItemsByTitle = (listTitle: string, filter?: string): Promise
         });
 };
 
+export const getOrderedListItemsByTitle = (listTitle: string, orderBy?: string, filter?: string): Promise<any> => {
+        return sp.web.lists.getByTitle(listTitle).items.filter(filter).orderBy(orderBy)()
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+                throw error;
+            });
+};
+
 export const addItem = async (listTitle: string, data: any): Promise<any> => {
     return await sp.web.lists.getByTitle(listTitle).items.add(data);
 }

@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "whats-up-version-2",
-    "id": "869084cb-512e-4d31-aab9-53e1e269fd4b",
+    "name": "whats-up-prev",
+    "id": "B64A99F8-BD12-404D-AF8F-43228130B0D9",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "whats-up-version-2 description"
+        "default": "whats-up preview description"
       },
       "longDescription": {
-        "default": "whats-up-version-2 description"
+        "default": "whats-up preview description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "whats-up-version-2 Feature",
+        "title": "whats-up-2-prev Feature",
         "description": "The feature that activates elements of the whats-up-version-2 solution.",
-        "id": "a613fc24-aadc-48e4-82a7-cb759701acd6",
+        "id": "5CC9B74B-3303-4C44-AAAB-1D3667B6281E",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/whats-up-version-2.sppkg"
+    "zippedPackage": "solution/whats-up-2-prev.sppkg"
   }
 }

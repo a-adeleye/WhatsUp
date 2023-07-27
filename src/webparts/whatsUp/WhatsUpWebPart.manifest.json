@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "ded137cc-c287-48e4-82d3-c4a8e1b3b45e",
+  "id": "B64A99F8-BD12-404D-AF8F-43228130B0D9",
   "alias": "WhatsUpWebPart",
   "componentType": "WebPart",
 
@@ -16,13 +16,13 @@
   "supportsThemeVariants": true,
 
   "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+    "groupId": "B64A99F8-BD12-404D-AF8F-43228130B0D9", // Advanced
     "group": { "default": "Advanced" },
-    "title": { "default": "WhatsUp" },
-    "description": { "default": "WhatsUp description" },
+    "title": { "default": "WhatsUp Prev" },
+    "description": { "default": "WhatsUp preview description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "WhatsUp"
+      "description": "WhatsUp Preview"
     }
   }]
 }

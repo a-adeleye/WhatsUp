@@ -24,7 +24,7 @@ const WhatsUp: React.FC<any> = () => {
 
     const getBaseData = (): void => {
         Promise.all([
-            getListItemsByTitle('Newsletter', 'Published eq 1'),
+            getListItemsByTitle('Newsletter', 'Status eq \'In Review\''),
             getListItemsByTitle("Newsletter sections"),
         ])
             .then(([news_letter, sections]) => {

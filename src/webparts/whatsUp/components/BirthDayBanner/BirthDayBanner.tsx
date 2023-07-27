@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import "./BirthDayBanner.scss";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
-import {extractImageUrl, getListItemsByTitle} from "../../Utils";
+import {extractImageUrl, getListItemsByTitle, getOrderedListItemsByTitle} from "../../Utils";
 import Celebrants from "../Celebrants/Celebrants";
 import {Spinner} from "office-ui-fabric-react";
 
@@ -22,7 +22,7 @@ const BirthDayBanner: React.FC<any> = (props) => {
         Promise.all([
             getListItemsByTitle("Birthday Banners", "NewsletterId eq '" + news_letter.Id + "'"),
             getListItemsByTitle("Birthday Text", "NewsletterId eq '" + news_letter.Id + "'"),
-            getListItemsByTitle("Birthday List", "NewsletterId eq '" + news_letter.Id + "'")])
+            getOrderedListItemsByTitle("Birthday List", 'Created', "NewsletterId eq '" + news_letter.Id + "'")])
             .then(([banners, birthday_text, celebrants]) => {
                 setBirthdayBanners(banners);
                 setBirthdayText(birthday_text[0]);

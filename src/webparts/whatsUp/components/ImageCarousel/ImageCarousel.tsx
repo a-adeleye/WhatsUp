@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Image} from 'office-ui-fabric-react';
 
 import './ImageCarousel.scss';
@@ -13,13 +13,31 @@ interface CarouselProps {
 
 const ImageCarousel: React.FC<CarouselProps> = ({images}) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const openPopup = () => {
+    const [currentIndex, setCurrentIndex] = useState<any>();
+    const openPopup = (index: number) => {
         setIsPopupOpen(true);
+        setCurrentIndex(index)
     };
 
     const closePopup = () => {
         setIsPopupOpen(false);
     };
+
+    const escFunction = (event: { keyCode: number; }) => {
+        if(event.keyCode === 27) {
+            closePopup();
+        }
+    }
+
+    useEffect(() => {
+        if (isPopupOpen) {
+            document.addEventListener("keydown", escFunction, false);
+        }
+
+        return () => {
+            document.removeEventListener("keydown", escFunction, false);
+        };
+    }, [isPopupOpen]);
 
     return (
         <>
@@ -29,9 +47,7 @@ const ImageCarousel: React.FC<CarouselProps> = ({images}) => {
             {isPopupOpen && (
                 <div className="popup-overlay" onClick={closePopup}>
                     <div className="popup-content">
-                        <Carousel showThumbs={false} autoPlay={true} infiniteLoop={true} showArrows={false}>
-                            {images.map(image => (<Image src={image} alt="Image"/>))}
-                        </Carousel>
+                        <Image src={images[currentIndex]} alt="Image"/>
                     </div>
                 </div>
             )}

@@ -18,6 +18,7 @@ const EmployeeCard: React.FC<any> = (props) => {
                 <b>{employee?.EmployeeName}</b>
                 <span>{employee?.Location}</span>
                 {type === 'title' && <span>{employee?.Title}</span>}
+                <span>{employee?.NewTitle}</span>
                 <span>{employee?.Department}</span>
                 {type === 'description' && <span>{employee?.Description}</span>}
             </div>

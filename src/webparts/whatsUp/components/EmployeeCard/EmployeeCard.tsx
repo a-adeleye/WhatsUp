@@ -20,7 +20,7 @@ const EmployeeCard: React.FC<any> = (props) => {
                 {type === 'title' || type === 'anniversary' && <span>{employee?.Title}</span>}
                 <span>{employee?.NewTitle}</span>
                 <span>{employee?.Department}</span>
-                <span>{employee?.caption}</span>
+                <span>{employee?.Caption}</span>
                 {type === 'description' && <span>{employee?.Description}</span>}
             </div>
         </div>

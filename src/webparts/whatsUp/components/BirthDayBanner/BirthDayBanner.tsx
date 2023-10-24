@@ -22,17 +22,18 @@ const BirthDayBanner: React.FC<any> = (props) => {
         Promise.all([
             getListItemsByTitle("Birthday Banners", "NewsletterId eq '" + news_letter.Id + "'"),
             getListItemsByTitle("Birthday Text", "NewsletterId eq '" + news_letter.Id + "'"),
-            getOrderedListItemsByTitle("Birthday List", 'Created', "NewsletterId eq '" + news_letter.Id + "'")])
+            getOrderedListItemsByTitle("Birthday List", 'BirthDayId', "NewsletterId eq '" + news_letter.Id + "'")])
             .then(([banners, birthday_text, celebrants]) => {
                 setBirthdayBanners(banners);
                 setBirthdayText(birthday_text[0]);
-                setCelebrants(celebrants);
+                setCelebrants(celebrants.sort((a: { BirthDayId: number; },b: { BirthDayId: number; }) => a.BirthDayId-b.BirthDayId));
                 setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
             });
     }
+
 
     const getImages = () => {
         if (!birthdayBanners.length) {

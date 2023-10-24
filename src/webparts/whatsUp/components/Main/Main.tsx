@@ -9,6 +9,7 @@ import BirthDayBanner from "../BirthDayBanner/BirthDayBanner";
 import ScamAwareness from "../ScamAwareness/ScamAwareness";
 import NewJoiners from "../NewJoiners/NewJoiners";
 import Movements from "../Movements/Movements";
+import Anniversaries from "../Anniversaries/Anniversaries";
 import Awards from "../Awards/Awards";
 import ShareYourStory from "../ShareYourStory/ShareYourStory";
 import BrightIdeas from "../BrightIdeas/BrightIdeas";
@@ -47,6 +48,9 @@ const Main: React.FC<any> = (props) => {
                 <BirthDayBanner news_letter={news_letter}/>
             </Section>}
             {sections["Scam Notification"] && <ScamAwareness/>}
+            {sections["Anniversaries"] && <Section title={"Anniversaries"} icon={"gift"}>
+                <Anniversaries news_letter={news_letter}/>
+            </Section>}
             {sections["New Joiners"] && <Section title={"New Joiners"} icon={"circle-plus"}>
                 <NewJoiners news_letter={news_letter}/>
             </Section>}

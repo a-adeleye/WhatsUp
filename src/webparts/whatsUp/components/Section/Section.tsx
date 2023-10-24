@@ -7,13 +7,14 @@ import {
     faCalendarDays,
     faCirclePlus,
     faCircleQuestion,
+    faGift,
     faRss,
     faTrophy,
     faUser
 } from '@fortawesome/free-solid-svg-icons'
 import {library} from '@fortawesome/fontawesome-svg-core'
 
-library.add(faUser, faRss, faCakeCandles, faCirclePlus, faTrophy, faBriefcase, faCalendarDays, faCircleQuestion);
+library.add(faUser, faRss, faCakeCandles, faCirclePlus, faTrophy, faBriefcase, faCalendarDays, faCircleQuestion,faGift);
 
 const Section: React.FC<any> = (props) => {
     const {title, icon, children} = props;

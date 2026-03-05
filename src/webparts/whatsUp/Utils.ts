@@ -1,14 +1,16 @@
-import {SPBrowser, spfi} from "@pnp/sp";
+import { SPBrowser, spfi } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items/list";
 import "@pnp/sp/site-users/web";
 import "@pnp/sp/site-groups/web";
+import "@pnp/sp/folders";
+import "@pnp/sp/files";
 
 
 const baseUrl = "https://jetexfs.sharepoint.com/sites/WhatsUp/";
 
-const sp = spfi().using(SPBrowser({baseUrl: baseUrl}));
+const sp = spfi().using(SPBrowser({ baseUrl: baseUrl }));
 
 export const getListByTitle = (listTitle: string): Promise<any> => {
     return sp.web.lists.getByTitle(listTitle).items()
@@ -51,14 +53,43 @@ export const getListItemsByTitle = (listTitle: string, filter?: string): Promise
 };
 
 export const getOrderedListItemsByTitle = (listTitle: string, orderBy?: string, filter?: string): Promise<any> => {
-        return sp.web.lists.getByTitle(listTitle).items.filter(filter).orderBy(orderBy)()
-            .then((response) => {
-                return response;
-            })
-            .catch((error) => {
-                console.log(error);
-                throw error;
-            });
+    return sp.web.lists.getByTitle(listTitle).items.filter(filter).orderBy(orderBy)()
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            console.log(error);
+            throw error;
+        });
+};
+
+export const getLibraryFilesByPath = (folderRelativeUrl: string): Promise<any> => {
+    const normalized = folderRelativeUrl.startsWith("/")
+        ? folderRelativeUrl
+        : `/sites/WhatsUp/${folderRelativeUrl}`;
+
+    return sp.web.getFolderByServerRelativePath(normalized).files
+        .select("*,ServerRelativeUrl,EncodedAbsUrl,ServerRedirectedEmbedUrl,LinkingUrl")()
+        .then((response: any) => response)
+        .catch((error: any) => {
+            console.log(error);
+            throw error;
+        });
+};
+
+export const getLibraryItemsWithMetadata = (libraryTitle: string, filter?: string): Promise<any> => {
+    const query = sp.web.lists.getByTitle(libraryTitle).items
+        .select("*", "FileRef", "EncodedAbsUrl", "FileLeafRef", "File/ServerRelativeUrl")
+        .expand("File");
+
+    const finalQuery = filter ? query.filter(filter) : query;
+
+    return finalQuery()
+        .then((response) => response)
+        .catch((error) => {
+            console.log("Error fetching library items with metadata:", error);
+            throw error;
+        });
 };
 
 export const addItem = async (listTitle: string, data: any): Promise<any> => {
@@ -75,4 +106,3 @@ export const currentUSer = async (): Promise<any> => {
             throw error;
         });
 }
-

@@ -45,12 +45,13 @@
     display: inline;
     max-width: 100%;
     font-size: 16px;
-    font-style: italic;
-    font-weight: 300;
+    // font-style: italic;
+    // font-weight: 300;
     line-height: 1.45;
     letter-spacing: 0.01em;
     text-align: left;
-    text-transform: none;
+    text-transform: uppercase;
+    
   }
 
   .featured-header__quote-mark {

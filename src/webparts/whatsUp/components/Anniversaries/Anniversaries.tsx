@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 
-import '../NewJoiners/NewJoiners.scss';
+import './Anniversaries.scss';
 import EmployeeCard from "../EmployeeCard/EmployeeCard";
 import {Spinner} from "office-ui-fabric-react";
 import {getListItemsByTitle} from "../../Utils";
@@ -33,7 +33,7 @@ const Anniversaries: React.FC<any> = (props) => {
             {loading && <div className={"text-center"}>
                 <Spinner size={3}/>
             </div>}
-            <div className={"new-joiners"}>
+            <div className={"anniversaries-grid"}>
                 {Anniversaries.map((item: any) => (
                     <EmployeeCard employee={item} key={item.Id} type={'anniversary'}/>
                 ))}

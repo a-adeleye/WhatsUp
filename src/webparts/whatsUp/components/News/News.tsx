@@ -5,9 +5,18 @@ import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import { extractImageUrl, getLibraryItemsWithMetadata, getListItemsByTitle } from "../../Utils";
 import { Spinner } from "office-ui-fabric-react";
 
+interface NewsItem {
+    id: number;
+    title: string;
+    content: string;
+    isVideo: boolean;
+    videoUrl: string;
+    images: string[];
+}
+
 const News: React.FC<any> = (props) => {
     const { news_letter } = props;
-    const [news, setNews] = useState([]);
+    const [news, setNews] = useState<NewsItem[]>([]);
     const [loading, setLoading] = useState(true);
 
     const extractNewsImages = (news: any, imageData: any) => {
@@ -66,13 +75,36 @@ const News: React.FC<any> = (props) => {
             })
             .catch((error) => {
                 console.log("Error fetching data:", error);
+                setLoading(false);
             });
     };
 
     useEffect(() => {
         getData();
     }, [news_letter]);
+    const renderMedia = (item: NewsItem): JSX.Element => {
+        if (item.isVideo) {
+            return item.videoUrl ? (
+                <video className={"news-card__video"} controls src={item.videoUrl} />
+            ) : (
+                <div className={"news-card__empty-media"}>No video available</div>
+            );
+        }
 
+        if (item.images.length > 1) {
+            return (
+                <div className={"news-card__carousel"}>
+                    <ImageCarousel images={item.images} />
+                </div>
+            );
+        }
+
+        if (item.images[0]) {
+            return <img className={"news-card__image"} src={item.images[0]} alt={item.title} />;
+        }
+
+        return <div className={"news-card__empty-media"}>{item.title}</div>;
+    };
 
     return (
         <>
@@ -80,25 +112,22 @@ const News: React.FC<any> = (props) => {
                 <Spinner size={3} />
             </div>}
 
-            {news.map((item: any) => (
-                <div className={"news"} key={item.id}>
-                    <div className={"subtitle"}>
-                        <h2>{item.title}</h2>
-                    </div>
-                    {item.isVideo ? (
-                        <div className={"news-video"}>
-                            {item.videoUrl ? (
-                                <video controls src={item.videoUrl} />
-                            ) : (
-                                <div>No video available</div>
-                            )}
+            {!loading && <div className={"news-list"}>
+                {news.map((item) => (
+                    <article className={"news-card"} key={item.id}>
+                        <div className={"news-card__media"}>
+                            {renderMedia(item)}
+                            <div className={"news-card__overlay"}>
+                                <h2 className={"news-card__title"}>{item.title}</h2>
+                            </div>
                         </div>
-                    ) : (
-                        <ImageCarousel images={item.images} />
-                    )}
-                    <div className={"text"} dangerouslySetInnerHTML={{ __html: item.content }} />
-                </div>))
-            }
+                        {item.content && <div
+                            className={"news-card__content"}
+                            dangerouslySetInnerHTML={{ __html: item.content }}
+                        />}
+                    </article>
+                ))}
+            </div>}
         </>
     );
 };

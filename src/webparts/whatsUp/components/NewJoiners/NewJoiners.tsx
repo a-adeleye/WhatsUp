@@ -34,9 +34,9 @@ const NewJoiners: React.FC<any> = (props) => {
             {loading && <div className={"text-center"}>
                 <Spinner size={3}/>
             </div>}
-            <div className={"new-joiners"}>
+            <div className={"new-joiners-grid"}>
                 {newJoiners.map((item: any) => (
-                    <EmployeeCard employee={item} key={item.Id} type='title'/>
+                    <EmployeeCard employee={item} key={item.Id} type='newJoiner'/>
                 ))}
             </div>
             <div className={"welcome"}>

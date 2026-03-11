@@ -1,0 +1,53 @@
+.section-header {
+  width: 100%;
+  margin-bottom: 2px;
+  font-family: 'Josefin Sans', sans-serif;
+
+  .section-header__top-text {
+    padding-left: 20px;
+    font-size: clamp(30px, 4.8vw, 46px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #b5b5b5;
+  }
+
+  .section-header__top-text--hidden {
+    visibility: hidden;
+  }
+
+  .section-header__pill {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px 14px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #c7c7c7 0%, #bcbcbc 100%);
+  }
+
+  .section-header__bottom-text {
+    font-size: clamp(34px, 5.8vw, 46px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .section-header__subtitle {
+    max-width: 60%;
+    margin-top: 25px;
+    margin-left: auto;
+    padding-right: 4px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.45;
+    letter-spacing: 0.2px;
+    text-align: right;
+    color: #ffffff;
+
+    @media (max-width:786px) {
+      max-width: 100%;
+    }
+  }
+}

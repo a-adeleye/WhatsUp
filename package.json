@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fluentui/react": "^7.199.1",
+    "@fontsource/josefin-sans": "^5.2.8",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",

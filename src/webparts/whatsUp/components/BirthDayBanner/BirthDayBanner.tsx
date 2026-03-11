@@ -5,10 +5,12 @@ import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import {extractImageUrl, getListItemsByTitle, getOrderedListItemsByTitle} from "../../Utils";
 import Celebrants from "../Celebrants/Celebrants";
 import {Spinner} from "office-ui-fabric-react";
+import SectionHeader from "../SectionHeader/SectionHeader";
 
 const BirthDayBanner: React.FC<any> = (props) => {
 
     const {news_letter} = props;
+    const celebrantsMonth = news_letter?.Title?.split(" ")[0] || "";
     const [birthdayBanners, setBirthdayBanners] = useState([]);
     const [celebrants, setCelebrants] = useState([]);
     const [birthdayText, setBirthdayText] = useState<any>([]);
@@ -52,16 +54,22 @@ const BirthDayBanner: React.FC<any> = (props) => {
     }, [news_letter])
 
     return (
-        <>
+        <div className={"birthday-banner"}>
+            <SectionHeader
+                topText={celebrantsMonth}
+                bottomText="Celebrants"
+                subtitle={birthdayText?.Title}
+            />
             {loading && <div className={"text-center"}>
                 <Spinner size={3}/>
             </div>}
-            <div className={"birthday-banner"}>
-                <p className={"birthday-text"}>{birthdayText?.Title}</p>
-                <ImageCarousel images={images}/>
-                <Celebrants celebrants={celebrants} news_letter={news_letter}/>
-            </div>
-        </>
+            {!loading && (
+                <>
+                    <ImageCarousel images={images}/>
+                    <Celebrants celebrants={celebrants}/>
+                </>
+            )}
+        </div>
     );
 }
 

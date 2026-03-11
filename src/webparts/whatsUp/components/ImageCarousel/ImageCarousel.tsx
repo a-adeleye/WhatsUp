@@ -42,7 +42,9 @@ const ImageCarousel: React.FC<CarouselProps> = ({images}) => {
     return (
         <>
             <Carousel showThumbs={false} autoPlay={true} infiniteLoop={true} onClickItem={openPopup}>
-                {images.map(image => (<Image src={image} alt="Image"/>))}
+                {images.map((image, index) => (
+                    <Image key={`${image}-${index}`} src={image} alt="Image"/>
+                ))}
             </Carousel>
             {isPopupOpen && (
                 <div className="popup-overlay" onClick={closePopup}>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 
-import '../NewJoiners/NewJoiners.scss';
+import './Awards.scss';
 import EmployeeCard from "../EmployeeCard/EmployeeCard";
 import {getListItemsByTitle} from "../../Utils";
 
@@ -61,9 +61,9 @@ const Awards: React.FC<any> = (props) => {
             <div className={"birthday-banner"}>
                 <ImageCarousel images={images}/>
             </div>
-            <div className={"new-joiners"}>
+            <div className={"awards-grid"}>
                 {awards.map((item: any) => (
-                    <EmployeeCard employee={item} key={item.Id} type={'description'}/>
+                    <EmployeeCard employee={item} key={item.Id} type={'award'}/>
                 ))}
             </div>
             

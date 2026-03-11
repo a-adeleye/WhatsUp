@@ -1,9 +1,9 @@
 .section {
-  background-color: #fff;
-  border: 1px solid #e6e9f0;
-  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
-  padding: 80px 0 50px;
-  margin-bottom: 100px;
+  // background-color: #fff;
+  // border: 1px solid #e6e9f0;
+  // box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.1);
+  padding: 80px 0 0;
+  margin-bottom: 0;
   border-radius: 12px;
 
   .section-title {
@@ -20,7 +20,7 @@
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
     text-transform: uppercase;
     color: #fff;
-    font-family: 'Josefin Sans', serif;
+    font-family: 'Josefin Sans', sans-serif;
 
     h2 {
       margin: 0;
@@ -31,10 +31,22 @@
 
 .section.container.no-padding {
   padding-top: 0;
+  padding-bottom: 0;
+}
+
+.section.section--birthday {
+  padding: 22px 20px 0;
+  // background: #efefef;
+  // border-color: #dddddd;
+  box-shadow: none;
 }
 
 @media (max-width: 576px) {
   .section .section-title {
     margin-left: 0;
+  }
+
+  .section.section--birthday {
+    padding: 16px 12px 0;
   }
 }

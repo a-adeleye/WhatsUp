@@ -1,21 +1,15 @@
 .birthday-banner {
-  padding: 0 50px 10px;
-}
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
-.birthday-text {
-  font-size: 20px;
+  .carousel-root {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 476px) {
   .birthday-banner {
-    padding: 20px 16px;
-  }
-
-  .celebrant {
-    max-width: unset;
-
-    .celebrant-image {
-      height: auto;
-    }
+    gap: 12px;
   }
 }

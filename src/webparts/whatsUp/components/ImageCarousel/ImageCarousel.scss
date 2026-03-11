@@ -23,10 +23,41 @@
   margin: 0 auto;
 }
 
+.carousel-root {
+  overflow: hidden;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  background: #ffffff;
+  margin-top: 10px;
+}
+
 .carousel {
   cursor: pointer;
+
+  .slide {
+    background: #ffffff;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+  }
 }
 
 .carousel.carousel-slider .control-arrow {
-  background: rgb(0 0 0 /40%) !important;
+  background: rgb(0 0 0 / 24%) !important;
+}
+
+.carousel .control-dots {
+  margin: 0 0 12px !important;
+}
+
+@media (max-width: 576px) {
+  .carousel {
+    img {
+      max-height: 280px;
+    }
+  }
 }

@@ -1,17 +1,16 @@
 .celebrants {
-  position: relative;
-  margin-top: 20px;
-}
-
-.celebrants-animated {
-  img {
-    max-width: 100%;
-  }
+  margin-top: 8px;
 }
 
 .celebrants-wrapper {
-  display: flex;
-  gap: 1em;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 576px) {
+  .celebrants-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 }

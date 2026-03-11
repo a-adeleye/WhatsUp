@@ -1,15 +1,16 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 
-import "./Featured-Employee.scss";
+import "./Featured-Employee-v2.scss";
 import {extractImageUrl, getListItemsByTitle} from "../../Utils";
 import {Image, Spinner} from "office-ui-fabric-react";
+import SectionHeader from "../SectionHeader/SectionHeader";
 
 const getHtmlContent = (value: string | undefined): string => {
     return typeof value === "string" ? value.trim() : "";
 };
 
-const FeaturedEmployee: React.FC<any> = (props) => {
+const FeaturedEmployeeV2: React.FC<any> = (props) => {
     const {news_letter} = props;
     const [featuredEmployee, setFeaturedEmployee] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -37,14 +38,23 @@ const FeaturedEmployee: React.FC<any> = (props) => {
     const hasProfile = Boolean(featuredImageUrl || employeeName || employeeTitle);
     const hasContent = Boolean(imageCaption || interviewQuestions.length || hasProfile);
 
-    const getData = () => {
+    const bodyClassName = [
+        "featured-v2__body",
+        !hasProfile ? "featured-v2__body--no-profile" : "",
+        !interviewQuestions.length ? "featured-v2__body--no-questions" : "",
+    ].filter(Boolean).join(" ");
+
+    useEffect(() => {
         if (!news_letter) {
+            setFeaturedEmployee(null);
             setLoading(false);
             return;
         }
+
+        setLoading(true);
+
         getListItemsByTitle("FeaturedEmployee", "NewsletterId eq '" + news_letter.Id + "'")
             .then((response) => {
-                console.log('Featured Employe', response);
                 setFeaturedEmployee(response?.[0] || null);
                 setLoading(false);
             })
@@ -52,11 +62,7 @@ const FeaturedEmployee: React.FC<any> = (props) => {
                 setFeaturedEmployee(null);
                 setLoading(false);
             });
-    }
-
-    useEffect(() => {
-        getData();
-    }, [news_letter])
+    }, [news_letter]);
 
     if (loading) {
         return (
@@ -71,41 +77,38 @@ const FeaturedEmployee: React.FC<any> = (props) => {
     }
 
     return (
-        <div className={"featured"}>
-            <div className={"featured-header"}>
-                <div className={"featured-header__top-text"}>Featured</div>
-                <div className={"featured-header__panel"}>
-                    <h2 className={"featured-header__bottom-text"}>Employees</h2>
-                    {imageCaption && <p className={"featured-header__quote"}>
-                        <span className={"featured-header__quote-mark featured-header__quote-mark--open"}>&ldquo;</span>
-                        <span className={"featured-header__quote-text"}>{imageCaption}</span>
-                        <span className={"featured-header__quote-mark featured-header__quote-mark--close"}>&rdquo;</span>
-                    </p>}
-                </div>
+        <div className={"featured-v2"}>
+            <div className={"featured-v2__intro"}>
+                <SectionHeader
+                    topText="Featured"
+                    bottomText="Employees"
+                    subtitle={imageCaption}
+                />
             </div>
-            {(interviewQuestions.length > 0 || hasProfile) && <div className={`featured-content${!hasProfile ? " featured-content--no-profile" : ""}`}>
-                {interviewQuestions.length > 0 && <div className={"featured-questions"}>
+            <div className={bodyClassName}>
+                {interviewQuestions.length > 0 && <div className={"featured-v2__questions"}>
                     {interviewQuestions.map((item, index) => (
-                        <div className="question" key={index}>
-                            <div className="question-text">
-                                <p>{item.question}</p>
-                                <div className="answer" dangerouslySetInnerHTML={{__html: item.answer}}/>
-                            </div>
+                        <div className={"featured-v2__question"} key={index}>
+                            <p className={"featured-v2__question-title"}>{item.question}</p>
+                            <div
+                                className={"featured-v2__answer"}
+                                dangerouslySetInnerHTML={{__html: item.answer}}
+                            />
                         </div>
                     ))}
                 </div>}
-                {hasProfile && <div className={"featured-profile"}>
-                    {featuredImageUrl && <div className={"featured-profile__image"}>
+                {hasProfile && <aside className={"featured-v2__profile"}>
+                    {featuredImageUrl && <div className={"featured-v2__image"}>
                         <Image src={featuredImageUrl} alt={employeeName || "Featured employee"}/>
                     </div>}
-                    {(employeeName || employeeTitle) && <div className={"featured-profile__card"}>
+                    {(employeeName || employeeTitle) && <div className={"featured-v2__profile-card"}>
                         {employeeName && <b>{employeeName}</b>}
                         {employeeTitle && <span>{employeeTitle}</span>}
                     </div>}
-                </div>}
-            </div>}
+                </aside>}
+            </div>
         </div>
     );
 }
 
-export default FeaturedEmployee
+export default FeaturedEmployeeV2

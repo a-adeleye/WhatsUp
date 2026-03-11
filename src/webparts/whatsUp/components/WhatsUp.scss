@@ -2,8 +2,42 @@
   --primary: #ff6900;
 }
 
+.CanvasComponent.LCS .CanvasZoneContainer.CanvasZoneContainer--selected:before,
+.CanvasComponent.LCS .CanvasZoneContainer:not(.CanvasZoneContainer--read):hover:before {
+  border: 0 !important;
+  display: none !important;
+}
+
+.CanvasComponent.LCS .CanvasZoneContainer.CanvasZoneContainer--hintUpdate.CanvasZoneContainerEmphasis,
+.CanvasComponent.LCS .CanvasZoneContainer.CanvasZoneContainer--hintUpdate.CanvasZoneContainerEmphasis[class*="root-"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: 'Josefin Sans', sans-serif !important;
+}
+
+.whats-up {
+  width: 100%;
+}
+
+.whats-up__header {
+  width: 100%;
+}
+
+.whats-up__main {
+  box-sizing: border-box;
+  padding: 0 15px;
+}
+
 .container {
-  margin: 0 auto 100px;
+  margin: 0 auto;
 }
 
 @media (min-width: 576px) {
@@ -56,7 +90,7 @@
   background-color: #fff;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, .2);
   color: #000;
-  font-family: 'Josefin Sans', serif;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 36px;
   margin-bottom: 18px;
   margin-left: -60px;
@@ -95,6 +129,10 @@
 }
 
 @media (max-width: 576px) {
+  .whats-up__main {
+    padding: 0 12px;
+  }
+
   .subtitle {
     width: 75%;
 

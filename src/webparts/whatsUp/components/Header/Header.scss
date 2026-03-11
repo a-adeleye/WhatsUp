@@ -1,44 +1,117 @@
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 40px;
+.header {
+  margin-bottom: 60px;
+}
 
-  .header-image {
-    text-align: center;
-    flex: 1;
+.insider-cover {
+  margin: 0;
+  padding-top: 0;
+}
 
-    img {
-      height: 76px;
-      width: auto;
-    }
+.insider-cover__frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 14px 14px;
+  background: #000000;
+  // box-shadow: 0 18px 0 #b9b9b9;
+}
+
+.insider-cover__background {
+  display: block;
+  width: 100%;
+  min-height: 320px;
+  aspect-ratio: 16 / 8.4;
+  object-fit: cover;
+}
+
+.insider-cover__top-shade,
+.insider-cover__bottom-shade {
+  position: absolute;
+  inset-inline: 0;
+  pointer-events: none;
+}
+
+.insider-cover__top-shade {
+    background: linear-gradient(180deg, rgb(0 0 0), rgb(0 0 0 / 75%) 57%, transparent);
+    height: 27%;
+    top: 0;
+}
+
+.insider-cover__bottom-shade {
+  bottom: 0;
+  height: 15%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.72) 100%);
+}
+
+.insider-cover__wordmark {
+  position: absolute;
+  top: 7.5%;
+  left: 50%;
+  width: min(44%, 420px);
+  transform: translateX(-50%);
+}
+
+.insider-cover__date {
+  position: absolute;
+  top: 5%;
+  right: 1.75%;
+  padding-left: 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.72);
+  color: #ffffff;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(12px, 1.1vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+@media (max-width: 992px) {
+  .header {
+    margin-bottom: 36px;
   }
 
-  .title {
-    font-family: 'Josefin Sans', serif;
+  .insider-cover__background {
+    min-height: 260px;
+  }
 
-    .date {
-      text-transform: capitalize;
-    }
+  .insider-cover__wordmark {
+    width: min(54%, 340px);
+  }
+
+  .insider-cover__date {
+    right: 1.25%;
+    padding-left: 10px;
+    letter-spacing: 0.12em;
   }
 }
 
-.header.container {
-  margin-bottom: 30px;
-}
-
-h4 {
-  margin-bottom: .5em;
-  margin-top: 0;
-  text-align: right;
-}
-
-@media (max-width: 990px) {
-  header {
-    flex-direction: column;
+@media (max-width: 576px) {
+  .header {
+    margin-bottom: 28px;
   }
 
-  h4 {
-    text-align: center;
+  .insider-cover__frame {
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 12px 0 #b9b9b9;
+  }
+
+  .insider-cover__background {
+    min-height: 190px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .insider-cover__wordmark {
+    top: 9%;
+    width: min(62%, 250px);
+  }
+
+  .insider-cover__date {
+    top: 12%;
+    right: 1%;
+    padding-left: 8px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
   }
 }

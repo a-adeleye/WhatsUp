@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import './Header.scss';
-import insiderWordmark from "../../assets/images/insider.png";
 import {getListItemsByTitle} from "../../Utils";
 
 const getHeaderImageUrl = (item: any): string => {
@@ -57,11 +56,6 @@ const Header: React.FC<any> = (props) => {
                     />
                     <div className={"insider-cover__top-shade"} />
                     {/* <div className={"insider-cover__bottom-shade"} /> */}
-                    <img
-                        className={"insider-cover__wordmark"}
-                        src={insiderWordmark}
-                        alt="Insider"
-                    />
                     {news_letter?.Title && <div className={"insider-cover__date"}>
                         {String(news_letter.Title).trim().toUpperCase()}
                     </div>}

@@ -4,7 +4,6 @@ import './Main.scss';
 // import {currentUSer} from "../../Utils";
 import Section from "../Section/Section";
 import FeaturedEmployee from "../Featured-Employee/Featured-Employee";
-import FeaturedEmployeeV2 from "../Featured-Employee-v2/Featured-Employee-v2";
 import News from "../News/News";
 import BirthDayBanner from "../BirthDayBanner/BirthDayBanner";
 // import ScamAwareness from "../ScamAwareness/ScamAwareness";
@@ -52,9 +51,6 @@ const Main: React.FC<any> = (props) => {
     if (sections["Feature Employee"]) {
         sectionItems.push(
             <FeaturedEmployee key={"feature-employee-v1"} news_letter={news_letter}/>
-        );
-        sectionItems.push(
-            <FeaturedEmployeeV2 key={"feature-employee-v2"} news_letter={news_letter}/>
         );
     }
 

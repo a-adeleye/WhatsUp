@@ -58,7 +58,7 @@ const Awards: React.FC<any> = (props) => {
             {loading && <div className={"text-center"}>
                 <Spinner size={3}/>
             </div>}
-            <div className={"birthday-banner"}>
+            <div className={"birthday-banner pt-16"}>
                 <ImageCarousel images={images}/>
             </div>
             <div className={"awards-grid"}>

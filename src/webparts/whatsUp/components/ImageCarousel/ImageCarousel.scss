@@ -27,6 +27,10 @@
   cursor: pointer;
 }
 
+.carousel.carousel-slider {
+  border-radius: 10px;
+}
+
 .carousel.carousel-slider .control-arrow {
   background: rgb(0 0 0 /40%) !important;
 }

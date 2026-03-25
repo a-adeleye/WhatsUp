@@ -1,7 +1,7 @@
 import * as React from 'react';
-// import {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import './Main.scss';
-// import {currentUSer} from "../../Utils";
+import {currentUSer} from "../../Utils";
 import Section from "../Section/Section";
 import FeaturedEmployee from "../Featured-Employee/Featured-Employee";
 import News from "../News/News";
@@ -15,7 +15,7 @@ import Awards from "../Awards/Awards";
 // import BrightIdeas from "../BrightIdeas/BrightIdeas";
 import UpcomingEvents from "../UpcomingEvents/UpcomingEvents";
 // import Stickers from "../Stickers/Stickers";
-// import Quiz from "../Quiz/Quiz";
+import Quiz from "../Quiz/Quiz";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import SectionSpacer from "../SectionSpacer/SectionSpacer";
 
@@ -23,20 +23,20 @@ const Main: React.FC<any> = (props) => {
 
     const {news_letter, sections} = props;
 
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState<any>(null);
 
-    // const getUser = (): void => {
-    //     currentUSer().then((response) => {
-    //         setUser(response);
-    //     })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // };
+    const getUser = (): void => {
+        currentUSer().then((response) => {
+            setUser(response);
+        })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
-    // useEffect(() => {
-    //     getUser();
-    // }, []);
+    useEffect(() => {
+        getUser();
+    }, []);
 
     const sectionItems: JSX.Element[] = [];
 
@@ -102,6 +102,14 @@ const Main: React.FC<any> = (props) => {
         sectionItems.push(
             <Section key={"events"} title={"Upcoming Events"} icon={"calendar-days"}>
                 <UpcomingEvents news_letter={news_letter}/>
+            </Section>
+        );
+    }
+
+    if (sections.Quiz) {
+        sectionItems.push(
+            <Section key={"quiz"}>
+                <Quiz news_letter={news_letter} user={user}/>
             </Section>
         );
     }

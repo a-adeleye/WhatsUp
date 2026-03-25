@@ -24,7 +24,7 @@ const Quiz: React.FC<any> = (props) => {
             .then((response) => {
                 setQuiz(response);
                 setLoading(false);
-            })
+            });
     }
 
     useEffect(() => {
@@ -100,40 +100,54 @@ const Quiz: React.FC<any> = (props) => {
             </div>}
             <div className={"quiz"}>
                 {quiz.map((item: any) => (
-                    <>
-                        <p className="heading">{item.QuizQuestion}</p>
-                        <div className="quiz-wrapper" key={item.Id}>
-                            <div className="quiz-item">
-                                <Image src={extractImageUrl(item.Image1)} alt={"quiz-image"}/>
-                                <p className="title">1</p>
-                            </div>
-                            <div className="quiz-item">
-                                <Image src={extractImageUrl(item.Image2)} alt={"quiz-image"}/>
-                                <p className="title">2</p>
-                            </div>
-                            <div className="quiz-item">
-                                <Image src={extractImageUrl(item.Image3)} alt={"quiz-image"}/>
-                                <p className="title">3</p>
+                    <div className="quiz__content" key={item.Id}>
+                        <div className="quiz__section-header">
+                            <div className="quiz__section-header-top-text" />
+
+                            <div className="quiz__section-header-pill">
+                                <div className="quiz__section-header-bottom-text">
+                                    Quiz
+                                </div>
+
+                                <div className="quiz__section-header-subtitle">
+                                    Last month&apos;s winner was
+                                    <strong>{item?.LastWinner || "TBC"}</strong>
+                                </div>
                             </div>
                         </div>
-                        <p className="last-winner">The winner will be selected at random from all correct entries and
-                            will receive a gift voucher.<br/>
-                            Last month&apos;s winner was <strong>{item?.LastWinner}</strong>
-                        </p>
+                        <p className="quiz__heading">{item.QuizQuestion}</p>
+
+                        <div className="quiz__gallery">
+                            <div className="quiz__card">
+                                <Image src={extractImageUrl(item.Image1)} alt={"Quiz scene 1"}/>
+                            </div>
+                            <div className="quiz__card">
+                                <Image src={extractImageUrl(item.Image2)} alt={"Quiz scene 2"}/>
+                            </div>
+                            <div className="quiz__card">
+                                <Image src={extractImageUrl(item.Image3)} alt={"Quiz scene 3"}/>
+                            </div>
+                        </div>
+
                         {isSubmitted && <p className={"success-message"}>Quiz submitted successfully.</p>}
-                        {!isSubmitted && <form action="">
+                        {!isSubmitted && <form className="quiz__form" action="">
                             {isError && <p className={"error-message"}>Please answer all questions.</p>}
                             {errorMessage && <p className={"error-message"}>{errorMessage}</p>}
-                            <input id={"Answer1"} type={"text"} placeholder={"Answer 1*"}
+                            <input id={"Answer1"} type={"text"} placeholder={"Answer 1"}
                                    onChange={(event) => handleChange(event)}/>
-                            <input id={"Answer2"} type={"text"} placeholder={"Answer 2*"}
+                            <input id={"Answer2"} type={"text"} placeholder={"Answer 2"}
                                    onChange={(event) => handleChange(event)}/>
-                            <input id={"Answer3"} type={"text"} placeholder={"Answer 3*"}
+                            <input id={"Answer3"} type={"text"} placeholder={"Answer 3"}
                                    onChange={(event) => handleChange(event)}/>
-                            <button disabled={!answer} onClick={handleSubmit} type={"button"}>Submit {submitting &&
-                                <Spinner/>}</button>
+                            <button disabled={!answer} onClick={handleSubmit} type={"button"}>
+                                Submit
+                                {submitting && <Spinner/>}
+                            </button>
                         </form>}
-                    </>
+                        <p className="quiz__footnote">
+                            The winner will be selected at random from all correct entries and will receive a gift voucher.
+                        </p>
+                    </div>
                 ))}
             </div>
             <Dialog
